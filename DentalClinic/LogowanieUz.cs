@@ -1,0 +1,97 @@
+﻿using System;
+using System.Data;
+using System.Data.OleDb;
+using System.Windows.Forms;
+
+namespace DentalClinic
+{
+    public partial class LogowanieUz : Form
+    {
+        // Zmienne do przechowywania danych logowania
+        private string username;
+        private string password;
+
+        public LogowanieUz()
+        {
+            InitializeComponent();
+        }
+
+        private void LogowanieUz_Load(object sender, EventArgs e)
+        {
+            // Możesz zainicjować coś przy ładowaniu formularza, jeśli to konieczne
+        }
+
+        private void Wroc_Click(object sender, EventArgs e)
+        {
+            this.Close(); // Zamknij okno logowania
+        }
+
+        private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register regForm = new Register();
+            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny
+            this.Close(); // Zamknij okno logowania
+        }
+
+
+
+        private bool AuthenticateUser(string username, string password)
+        {
+            using (OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.accdb;"))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT COUNT(*) FROM Uzytkownicy WHERE UserName = @UserName AND Password = @Password";
+                    using (OleDbCommand command = new OleDbCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserName", username);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        int count = (int)command.ExecuteScalar(); // Zwróci liczbę dopasowanych użytkowników
+
+                        return count > 0; // Zwróci true, jeśli użytkownik istnieje
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Wystąpił błąd podczas weryfikacji: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        private void Login_TextChanged(object sender, EventArgs e)
+        {
+            // Uaktualnij zmienną username przy każdej zmianie w polu logowania
+            username = Login.Text; // Zakładając, że masz TextBox o nazwie txtUsername
+        }
+
+        private void Password_TextChanged(object sender, EventArgs e)
+        {
+            // Uaktualnij zmienną password przy każdej zmianie w polu hasła
+            password = Password.Text; // Zakładając, że masz TextBox o nazwie txtPassword
+        }
+
+        private void Zaloguj_Click(object sender, EventArgs e)
+        {
+            // Sprawdź, czy dane logowania zostały wprowadzone
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Proszę wprowadzić nazwę użytkownika i hasło.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (AuthenticateUser(username, password))
+            {
+                // Jeśli użytkownik jest zweryfikowany, otwórz główne okno
+                WizytaOmow wizForm = new WizytaOmow();
+                wizForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawna nazwa użytkownika lub hasło.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
+}
