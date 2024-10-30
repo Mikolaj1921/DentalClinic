@@ -19,7 +19,7 @@ namespace DentalClinic
 
         private void LogowanieUz_Load(object sender, EventArgs e)
         {
-            // Możesz zainicjować coś przy ładowaniu formularza, jeśli to konieczne 
+            // Możesz zainicjować coś przy ładowaniu formularza, jeśli to konieczne  
         }
 
         private void Wroc_Click(object sender, EventArgs e)
