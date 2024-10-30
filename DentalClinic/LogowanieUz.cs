@@ -19,7 +19,7 @@ namespace DentalClinic
 
         private void LogowanieUz_Load(object sender, EventArgs e)
         {
-           
+            
         }
 
         private void Wroc_Click(object sender, EventArgs e)
