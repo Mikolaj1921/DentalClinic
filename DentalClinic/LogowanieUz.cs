@@ -24,7 +24,7 @@ namespace DentalClinic
         private void Wroc_Click(object sender, EventArgs e)
         {
             this.Close(); // Zamknij okno logowania
-        } 
+        }
 
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
