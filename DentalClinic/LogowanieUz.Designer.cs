@@ -33,6 +33,9 @@
             this.Register = new System.Windows.Forms.LinkLabel();
             this.Login = new System.Windows.Forms.TextBox();
             this.Password = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Wroc
@@ -84,11 +87,33 @@
             this.Password.TabIndex = 4;
             this.Password.TextChanged += new System.EventHandler(this.Password_TextChanged);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Location = new System.Drawing.Point(-1, 813);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1500, 53);
+            this.panel2.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(32, 12);
+            this.label2.MaximumSize = new System.Drawing.Size(0, 16);
+            this.label2.MinimumSize = new System.Drawing.Size(0, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(245, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "estetika © 2024   |    realizacja: MM studio";
+            // 
             // LogowanieUz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1491, 859);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Login);
             this.Controls.Add(this.Register);
@@ -98,6 +123,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LogowanieUz";
             this.Load += new System.EventHandler(this.LogowanieUz_Load);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,5 +137,7 @@
         private System.Windows.Forms.LinkLabel Register;
         private System.Windows.Forms.TextBox Login;
         private System.Windows.Forms.TextBox Password;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
     }
 }

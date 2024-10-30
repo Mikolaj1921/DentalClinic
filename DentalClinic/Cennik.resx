@@ -117,4 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Szanowni Pacjenci,
+Miło nam poinformować, że zgodnie z naszą misją i w trosce o najwyższą jakość świadczonych usług, nasi doświadczeni lekarze stosują
+materiały i sprzęt tylko renomowanych i sprawdzonych producentów. Wszystkie stałe prace protetyczne wykonujemy we własnym laboratorium
+protetycznym, dzięki czemu jakość idzie w parze z estetyką uśmiechów naszych pacjentów, a terminy realizacji są maksymalnie skrócone.
+
+W całym procesie leczenia otaczamy naszych pacjentów troską i opieką, aby czuli się maksymalnie komfortowo.
+
+Przedstawiamy skrócony cennik naszej kompleksowej oferty usług:</value>
+  </data>
+  <data name="treeView1.Nodes" xml:space="preserve">
+    <value>Implant tytanowy PREMIUM (Nobel Biocare, MIS, Adin) , (cena obejmuje całościowy zabieg, odsłonięcie implantu, śrubę gojącą, kształtowanie dziąsła, zdjęcie szwów, wskazania pozabiegowe, opiekę pozabiegową) - 3800 zł</value>
+  </data>
+  <data name="treeNode82.Text" xml:space="preserve">
+    <value>Implant tytanowy PREMIUM (Nobel Biocare, MIS, Adin) , (cena obejmuje całościowy zabieg, odsłonięcie implantu, śrubę gojącą, kształtowanie dziąsła, zdjęcie szwów, wskazania pozabiegowe, opiekę pozabiegową) - 3800 zł</value>
+  </data>
 </root>
