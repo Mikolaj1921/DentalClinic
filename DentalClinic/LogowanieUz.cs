@@ -19,19 +19,19 @@ namespace DentalClinic
 
         private void LogowanieUz_Load(object sender, EventArgs e)
         {
-            
+            // Możesz zainicjować coś przy ładowaniu formularza, jeśli to konieczne 
         }
 
         private void Wroc_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close(); // Zamknij okno logowania
         }
 
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Register regForm = new Register();
-            regForm.ShowDialog(); 
-            this.Close();
+            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny
+            this.Close(); // Zamknij okno logowania
         }
 
 
