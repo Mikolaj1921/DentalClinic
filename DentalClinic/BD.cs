@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Data;
-using System.Data.OleDb;
+using System.Data.SQLite; 
 using System.Windows.Forms;
 
 namespace DentalClinic
 {
     internal class BD
     {
-        public class AccessDatabaseConnection
+        public class SQLiteDatabaseConnection
         {
-            // Ciąg połączenia do bazy danych Access
-            private string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.accdb;";
+            // Ciąg połączenia do bazy danych SQLite
+            private string connectionString = @"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;";
+
 
             // Metoda nawiązująca połączenie z bazą danych
-            public OleDbConnection GetConnection()
+            public SQLiteConnection GetConnection()
             {
-                OleDbConnection connection = new OleDbConnection(connectionString);
+                SQLiteConnection connection = new SQLiteConnection(connectionString); 
                 return connection;
             }
 
             // Metoda do sprawdzenia połączenia
             public void CheckConnection()
             {
-                using (OleDbConnection connection = GetConnection())
+                using (SQLiteConnection connection = GetConnection())
                 {
                     try
                     {
@@ -45,12 +46,12 @@ namespace DentalClinic
             // Metoda do dodawania użytkownika
             public void AddUser(string userName, string email, string password)
             {
-                using (OleDbConnection connection = GetConnection())
+                using (SQLiteConnection connection = GetConnection())
                 {
                     try
                     {
                         connection.Open();
-                        using (OleDbCommand command = new OleDbCommand("INSERT INTO Users (UserName, Email, Password) VALUES (@UserName, @Email, @Password)", connection))
+                        using (SQLiteCommand command = new SQLiteCommand("INSERT INTO Users (UserName, Email, Password) VALUES (@UserName, @Email, @Password)", connection))
                         {
                             command.Parameters.AddWithValue("@UserName", userName);
                             command.Parameters.AddWithValue("@Email", email);
@@ -72,14 +73,14 @@ namespace DentalClinic
             {
                 DataTable usersTable = new DataTable();
 
-                using (OleDbConnection connection = GetConnection())
+                using (SQLiteConnection connection = GetConnection())
                 {
                     try
                     {
                         connection.Open();
-                        using (OleDbCommand command = new OleDbCommand("SELECT UserName, Email FROM Users", connection)) // Pobieramy tylko UserName i Email
+                        using (SQLiteCommand command = new SQLiteCommand("SELECT UserName, Email FROM Users", connection)) // Pobieramy tylko UserName i Email
                         {
-                            using (OleDbDataAdapter adapter = new OleDbDataAdapter(command))
+                            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
                             {
                                 adapter.Fill(usersTable);
                             }
@@ -97,12 +98,12 @@ namespace DentalClinic
             // Metoda do usuwania użytkownika
             public void DeleteUser(string email)
             {
-                using (OleDbConnection connection = GetConnection())
+                using (SQLiteConnection connection = GetConnection())
                 {
                     try
                     {
                         connection.Open();
-                        using (OleDbCommand command = new OleDbCommand("DELETE FROM Users WHERE Email = @Email", connection))
+                        using (SQLiteCommand command = new SQLiteCommand("DELETE FROM Users WHERE Email = @Email", connection))
                         {
                             command.Parameters.AddWithValue("@Email", email);
                             int rowsAffected = command.ExecuteNonQuery();

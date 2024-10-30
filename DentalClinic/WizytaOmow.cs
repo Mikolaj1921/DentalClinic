@@ -16,5 +16,10 @@ namespace DentalClinic
         {
             InitializeComponent();
         }
+
+        private void WizytaOmow_Load(object sender, EventArgs e)
+        {
+             
+        }
     }
 }

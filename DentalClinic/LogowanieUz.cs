@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
-using System.Data.OleDb;
+//using System.Data.OleDb;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace DentalClinic
@@ -18,7 +19,7 @@ namespace DentalClinic
 
         private void LogowanieUz_Load(object sender, EventArgs e)
         {
-            // Możesz zainicjować coś przy ładowaniu formularza, jeśli to konieczne
+            // Możesz zainicjować coś przy ładowaniu formularza, jeśli to konieczne  
         }
 
         private void Wroc_Click(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace DentalClinic
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Register regForm = new Register();
-            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny
+            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny 
             this.Close(); // Zamknij okno logowania
         }
 
@@ -37,18 +38,19 @@ namespace DentalClinic
 
         private bool AuthenticateUser(string username, string password)
         {
-            using (OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.accdb;"))
+            // Użycie SQLiteConnection z podanym ciągiem połączenia
+            using (SQLiteConnection connection = new SQLiteConnection(@"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;"))
             {
                 try
                 {
                     connection.Open();
                     string query = "SELECT COUNT(*) FROM Uzytkownicy WHERE UserName = @UserName AND Password = @Password";
-                    using (OleDbCommand command = new OleDbCommand(query, connection))
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@UserName", username);
                         command.Parameters.AddWithValue("@Password", password);
 
-                        int count = (int)command.ExecuteScalar(); // Zwróci liczbę dopasowanych użytkowników
+                        int count = Convert.ToInt32(command.ExecuteScalar()); // Zwróci liczbę dopasowanych użytkowników
 
                         return count > 0; // Zwróci true, jeśli użytkownik istnieje
                     }

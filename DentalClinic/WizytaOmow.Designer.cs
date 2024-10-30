@@ -38,6 +38,7 @@
             this.Name = "WizytaOmow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WizytaOmow";
+            this.Load += new System.EventHandler(this.WizytaOmow_Load);
             this.ResumeLayout(false);
 
         }
