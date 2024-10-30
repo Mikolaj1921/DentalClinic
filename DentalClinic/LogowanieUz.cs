@@ -30,7 +30,7 @@ namespace DentalClinic
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Register regForm = new Register();
-            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny
+            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny 
             this.Close(); // Zamknij okno logowania
         }
 
