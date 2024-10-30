@@ -44,15 +44,23 @@ namespace DentalClinic
             }
 
             // Metoda do dodawania użytkownika
-            public void AddUser(string userName, string email, string password)
+            public void AddUser(string imie, string nazwisko, string telephone, int wiek, string plec, string userName, string email, string password)
             {
                 using (SQLiteConnection connection = GetConnection())
                 {
                     try
                     {
                         connection.Open();
-                        using (SQLiteCommand command = new SQLiteCommand("INSERT INTO Users (UserName, Email, Password) VALUES (@UserName, @Email, @Password)", connection))
+                        using (SQLiteCommand command = new SQLiteCommand(
+                            "INSERT INTO Uzytkownicy (Imie, Nazwisko, Telephone, Wiek, Plec, UserName, Email, Password) " +
+                            "VALUES (@Imie, @Nazwisko, @Telephone, @Wiek, @Plec, @UserName, @Email, @Password)", connection))
                         {
+                            // Przypisanie parametrów do kolumn
+                            command.Parameters.AddWithValue("@Imie", imie);
+                            command.Parameters.AddWithValue("@Nazwisko", nazwisko);
+                            command.Parameters.AddWithValue("@Telephone", telephone);
+                            command.Parameters.AddWithValue("@Wiek", wiek);
+                            command.Parameters.AddWithValue("@Plec", plec);
                             command.Parameters.AddWithValue("@UserName", userName);
                             command.Parameters.AddWithValue("@Email", email);
                             command.Parameters.AddWithValue("@Password", password);
@@ -67,6 +75,7 @@ namespace DentalClinic
                     }
                 }
             }
+
 
             // Metoda do pobierania danych użytkowników
             public DataTable GetUsers()
