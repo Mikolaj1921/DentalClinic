@@ -60,10 +60,10 @@
             this.Register.AutoSize = true;
             this.Register.Location = new System.Drawing.Point(836, 572);
             this.Register.Name = "Register";
-            this.Register.Size = new System.Drawing.Size(68, 16);
+            this.Register.Size = new System.Drawing.Size(83, 16);
             this.Register.TabIndex = 2;
             this.Register.TabStop = true;
-            this.Register.Text = "linkLabel1";
+            this.Register.Text = "Zarejstruj się";
             this.Register.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Register_LinkClicked);
             // 
             // Login
