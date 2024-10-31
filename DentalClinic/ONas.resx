@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Estetika Dental Clinic Cierplikowski &amp; Delmaczyński powstała w 2005 roku.
+
+Założeniem było stworzenie nowoczesnej kliniki, w której opiekę nad Pacjentem sprawuje kilku lekarzy – każdy w swoim wyspecjalizowanym zakresie.
+Kompleksową i wielopoziomową opiekę zapewniają profesjonaliści z zakresu stomatologii zachowawczej, estetycznej, ortodoncji, pedodoncji, protetyki,
+implantologii i periodontologii, którzy stale rozwijają swoje kompetencje oraz nie boją się sięgać po innowacje i nowoczesne rozwiązania w stomatologii. 
+
+Ogromna renoma i rosnące zapotrzebowanie na profesjonalną opiekę dentystyczną sprawiły, że od lipca 2019 klinika mieści się w nowoczesnym, większym budynku przy al. Witosa 15 b.
+Na powierzchni 660m2 powstało 8 gabinetów wyposażonych w najnowocześniejszy sprzęt diagnostyczno-medyczny oraz pracownie tomograficzna i protetyczna, centrum konferencyjne a także studio foto.
+
+Dzięki stałym inwestycjom w zaawansowany technologicznie sprzęt cyfrowy oraz nieustającemu poszerzaniu wiedzy przez naszych specjalistów, Pacjenci mogą być pewni, że są w najlepszych rękach.</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Wiedzę i doświadczenie zespołu Estetika Dental Clinic wspierają najnowsze technologie oraz rozwiązania w stomatologii. 
+Jesteśmy przekonani, że najwyższy standard wyposażenia gwarantuje jakość leczenia na światowym poziomie.
+Dlatego stale śledzimy nowinki i trendy w branży, uczestniczymy w prezentacjach najnowszych rozwiązań oraz inwestujemy
+z zaawansowany sprzęt cyfrowy.</value>
+  </data>
 </root>

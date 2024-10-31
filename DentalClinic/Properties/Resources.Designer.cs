@@ -93,6 +93,26 @@ namespace DentalClinic.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IMG_6029 {
+            get {
+                object obj = ResourceManager.GetObject("IMG_6029", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IMG_8961 {
+            get {
+                object obj = ResourceManager.GetObject("IMG_8961", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IMG_9008_400x284 {
             get {
                 object obj = ResourceManager.GetObject("IMG_9008-400x284", resourceCulture);
@@ -113,6 +133,16 @@ namespace DentalClinic.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IMG_9024_400x2841 {
+            get {
+                object obj = ResourceManager.GetObject("IMG_9024-400x2841", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IMG_9063_400x284 {
             get {
                 object obj = ResourceManager.GetObject("IMG_9063-400x284", resourceCulture);
@@ -126,6 +156,26 @@ namespace DentalClinic.Properties {
         internal static System.Drawing.Bitmap IMG_9078_400x284 {
             get {
                 object obj = ResourceManager.GetObject("IMG_9078-400x284", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IMG_9078_400x2841 {
+            get {
+                object obj = ResourceManager.GetObject("IMG_9078-400x2841", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IMG_9126 {
+            get {
+                object obj = ResourceManager.GetObject("IMG_9126", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
