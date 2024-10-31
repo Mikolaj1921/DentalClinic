@@ -15,7 +15,8 @@ namespace DentalClinic
 
         private void label1_Click(object sender, EventArgs e)
         {
-            
+            GlownaStr glownaForm = new GlownaStr();
+            glownaForm.ShowDialog();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -26,6 +27,35 @@ namespace DentalClinic
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            GlownaStr glownaForm = new GlownaStr();
+            glownaForm.ShowDialog();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Kontakt kontaktForm = new Kontakt();
+            kontaktForm.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DlaczegoMy dlaczegoMyForm = new DlaczegoMy();
+            dlaczegoMyForm.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ONas onasForm = new ONas();
+            onasForm.ShowDialog();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

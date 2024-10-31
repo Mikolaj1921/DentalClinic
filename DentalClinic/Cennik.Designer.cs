@@ -29,44 +29,46 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cennik));
-            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("Wizyta adaptacyjna\t- 170 zł");
-            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("Wypełnienia(oferujemy duży wybór kolorów, stosujemy materiały tylko najwyższej ja" +
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Wizyta adaptacyjna\t- 170 zł");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Wypełnienia(oferujemy duży wybór kolorów, stosujemy materiały tylko najwyższej ja" +
         "kości) - 250 zł");
-            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("Znieczulenie tradycyjne(stosujemy tylko najskuteczniejsze środki znieczulające) -" +
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Znieczulenie tradycyjne(stosujemy tylko najskuteczniejsze środki znieczulające) -" +
         " 60 zł");
-            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("Znieczulenie komputerowe The Wand(znieczulenie komputerowe to najbardziej komfort" +
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Znieczulenie komputerowe The Wand(znieczulenie komputerowe to najbardziej komfort" +
         "owa i bezpieczna forma znieczulenia) - 80 zł");
-            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("Węzeł2");
-            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("Stomatologia dziecięca", new System.Windows.Forms.TreeNode[] {
-            treeNode71,
-            treeNode72,
-            treeNode73,
-            treeNode74,
-            treeNode75});
-            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("Przegląd stomatologiczny - 0 zł");
-            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("Stomatologia zachowawcza i endodoncja", new System.Windows.Forms.TreeNode[] {
-            treeNode77});
-            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("Profilaktyka");
-            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("Ortodoncja");
-            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Chirurgia stomatologiczna");
-            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode(resources.GetString("treeView1.Nodes"));
-            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("Implantologia - Wszystkie zabiegi wykonujemy z użyciem najskuteczniejszych zniecz" +
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Węzeł2");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Stomatologia dziecięca", new System.Windows.Forms.TreeNode[] {
+            treeNode29,
+            treeNode30,
+            treeNode31,
+            treeNode32,
+            treeNode33});
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Przegląd stomatologiczny - 0 zł");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Stomatologia zachowawcza i endodoncja", new System.Windows.Forms.TreeNode[] {
+            treeNode35});
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Profilaktyka");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Ortodoncja");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Chirurgia stomatologiczna");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode(resources.GetString("treeView1.Nodes"));
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Implantologia - Wszystkie zabiegi wykonujemy z użyciem najskuteczniejszych zniecz" +
         "uleń, stosujemy implanty tylko renomowanych firm, tylko najwyższej jakości z 10 " +
         "– letnią gwarancją", new System.Windows.Forms.TreeNode[] {
-            treeNode82});
-            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Protetyka");
+            treeNode40});
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Protetyka");
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.LogoGora = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).BeginInit();
@@ -122,47 +124,47 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Location = new System.Drawing.Point(33, 437);
             this.treeView1.Name = "treeView1";
-            treeNode71.Name = "Węzeł1";
-            treeNode71.Text = "Wizyta adaptacyjna\t- 170 zł";
-            treeNode72.Name = "Węzeł2";
-            treeNode72.Text = "Wypełnienia(oferujemy duży wybór kolorów, stosujemy materiały tylko najwyższej ja" +
+            treeNode29.Name = "Węzeł1";
+            treeNode29.Text = "Wizyta adaptacyjna\t- 170 zł";
+            treeNode30.Name = "Węzeł2";
+            treeNode30.Text = "Wypełnienia(oferujemy duży wybór kolorów, stosujemy materiały tylko najwyższej ja" +
     "kości) - 250 zł";
-            treeNode73.Name = "Węzeł0";
-            treeNode73.Text = "Znieczulenie tradycyjne(stosujemy tylko najskuteczniejsze środki znieczulające) -" +
+            treeNode31.Name = "Węzeł0";
+            treeNode31.Text = "Znieczulenie tradycyjne(stosujemy tylko najskuteczniejsze środki znieczulające) -" +
     " 60 zł";
-            treeNode74.Name = "Węzeł1";
-            treeNode74.Text = "Znieczulenie komputerowe The Wand(znieczulenie komputerowe to najbardziej komfort" +
+            treeNode32.Name = "Węzeł1";
+            treeNode32.Text = "Znieczulenie komputerowe The Wand(znieczulenie komputerowe to najbardziej komfort" +
     "owa i bezpieczna forma znieczulenia) - 80 zł";
-            treeNode75.Name = "Węzeł2";
-            treeNode75.Text = "Węzeł2";
-            treeNode76.Name = "Węzeł0";
-            treeNode76.Text = "Stomatologia dziecięca";
-            treeNode77.Name = "Węzeł4";
-            treeNode77.Text = "Przegląd stomatologiczny - 0 zł";
-            treeNode78.Name = "Węzeł3";
-            treeNode78.Text = "Stomatologia zachowawcza i endodoncja";
-            treeNode79.Name = "Węzeł5";
-            treeNode79.Text = "Profilaktyka";
-            treeNode80.Name = "Węzeł6";
-            treeNode80.Text = "Ortodoncja";
-            treeNode81.Name = "Węzeł7";
-            treeNode81.Text = "Chirurgia stomatologiczna";
-            treeNode82.Name = "Węzeł10";
-            treeNode82.Text = resources.GetString("treeNode82.Text");
-            treeNode83.Name = "Węzeł8";
-            treeNode83.Text = "Implantologia - Wszystkie zabiegi wykonujemy z użyciem najskuteczniejszych zniecz" +
+            treeNode33.Name = "Węzeł2";
+            treeNode33.Text = "Węzeł2";
+            treeNode34.Name = "Węzeł0";
+            treeNode34.Text = "Stomatologia dziecięca";
+            treeNode35.Name = "Węzeł4";
+            treeNode35.Text = "Przegląd stomatologiczny - 0 zł";
+            treeNode36.Name = "Węzeł3";
+            treeNode36.Text = "Stomatologia zachowawcza i endodoncja";
+            treeNode37.Name = "Węzeł5";
+            treeNode37.Text = "Profilaktyka";
+            treeNode38.Name = "Węzeł6";
+            treeNode38.Text = "Ortodoncja";
+            treeNode39.Name = "Węzeł7";
+            treeNode39.Text = "Chirurgia stomatologiczna";
+            treeNode40.Name = "Węzeł10";
+            treeNode40.Text = resources.GetString("treeNode40.Text");
+            treeNode41.Name = "Węzeł8";
+            treeNode41.Text = "Implantologia - Wszystkie zabiegi wykonujemy z użyciem najskuteczniejszych zniecz" +
     "uleń, stosujemy implanty tylko renomowanych firm, tylko najwyższej jakości z 10 " +
     "– letnią gwarancją";
-            treeNode84.Name = "Węzeł9";
-            treeNode84.Text = "Protetyka";
+            treeNode42.Name = "Węzeł9";
+            treeNode42.Text = "Protetyka";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode76,
-            treeNode78,
-            treeNode79,
-            treeNode80,
-            treeNode81,
-            treeNode83,
-            treeNode84});
+            treeNode34,
+            treeNode36,
+            treeNode37,
+            treeNode38,
+            treeNode39,
+            treeNode41,
+            treeNode42});
             this.treeView1.Size = new System.Drawing.Size(1429, 330);
             this.treeView1.TabIndex = 5;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -170,6 +172,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.button8);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button5);
@@ -181,6 +184,28 @@
             this.panel1.Size = new System.Drawing.Size(1500, 156);
             this.panel1.TabIndex = 6;
             // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.Control;
+            this.button8.Location = new System.Drawing.Point(159, 43);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(98, 40);
+            this.button8.TabIndex = 16;
+            this.button8.Text = "Główna";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(45, 43);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 40);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Wróć";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Control;
@@ -190,6 +215,7 @@
             this.button6.TabIndex = 12;
             this.button6.Text = "Kontakt";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -211,6 +237,7 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "Dlaczego my?";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -221,6 +248,7 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "O nas";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // LogoGora
             // 
@@ -232,27 +260,31 @@
             this.LogoGora.TabIndex = 3;
             this.LogoGora.TabStop = false;
             // 
-            // button1
+            // button7
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(45, 43);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 40);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Wróć";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button7.BackColor = System.Drawing.SystemColors.Control;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button7.ForeColor = System.Drawing.Color.DimGray;
+            this.button7.Location = new System.Drawing.Point(1360, -3);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(137, 26);
+            this.button7.TabIndex = 11;
+            this.button7.Text = "Zamknij";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Cennik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1491, 859);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Cennik";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cennik";
@@ -279,5 +311,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox LogoGora;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
     }
 }

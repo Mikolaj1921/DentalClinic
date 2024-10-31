@@ -97,5 +97,15 @@ namespace DentalClinic
             ONas onasForm = new ONas();
             onasForm.ShowDialog();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -33,6 +33,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.LogoGora = new System.Windows.Forms.PictureBox();
             this.TekstInfoGora = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,19 +45,20 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LogoGora = new System.Windows.Forms.PictureBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
@@ -111,6 +113,17 @@
             this.button3.Text = "O nas";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // LogoGora
+            // 
+            this.LogoGora.Image = global::DentalClinic.Properties.Resources.estetika_dental_clinic_favicon_color;
+            this.LogoGora.InitialImage = null;
+            this.LogoGora.Location = new System.Drawing.Point(1298, 23);
+            this.LogoGora.Name = "LogoGora";
+            this.LogoGora.Size = new System.Drawing.Size(182, 119);
+            this.LogoGora.TabIndex = 3;
+            this.LogoGora.TabStop = false;
+            this.LogoGora.Click += new System.EventHandler(this.LogoGora_Click);
             // 
             // TekstInfoGora
             // 
@@ -219,16 +232,18 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // LogoGora
+            // button7
             // 
-            this.LogoGora.Image = global::DentalClinic.Properties.Resources.estetika_dental_clinic_favicon_color;
-            this.LogoGora.InitialImage = null;
-            this.LogoGora.Location = new System.Drawing.Point(1298, 23);
-            this.LogoGora.Name = "LogoGora";
-            this.LogoGora.Size = new System.Drawing.Size(182, 119);
-            this.LogoGora.TabIndex = 3;
-            this.LogoGora.TabStop = false;
-            this.LogoGora.Click += new System.EventHandler(this.LogoGora_Click);
+            this.button7.BackColor = System.Drawing.SystemColors.Control;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button7.ForeColor = System.Drawing.Color.DimGray;
+            this.button7.Location = new System.Drawing.Point(1360, -3);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(137, 26);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "Zamknij";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // GlownaStr
             // 
@@ -245,20 +260,20 @@
             this.Controls.Add(this.Tekst1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GlownaStr";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GlownaStr";
             this.Load += new System.EventHandler(this.GlownaStr_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +298,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button7;
     }
 }
