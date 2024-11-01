@@ -37,10 +37,14 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.LogoGora = new System.Windows.Forms.PictureBox();
             this.button7 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LogoGora = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,16 +150,6 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // LogoGora
-            // 
-            this.LogoGora.Image = global::DentalClinic.Properties.Resources.estetika_dental_clinic_favicon_color;
-            this.LogoGora.InitialImage = null;
-            this.LogoGora.Location = new System.Drawing.Point(1298, 23);
-            this.LogoGora.Name = "LogoGora";
-            this.LogoGora.Size = new System.Drawing.Size(182, 119);
-            this.LogoGora.TabIndex = 3;
-            this.LogoGora.TabStop = false;
-            // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.SystemColors.Control;
@@ -169,11 +163,60 @@
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 527F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 468F));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 173);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1467, 338);
+            this.tableLayoutPanel1.TabIndex = 12;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(484, 424);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.Size = new System.Drawing.Size(995, 383);
+            this.webBrowser1.TabIndex = 13;
+            this.webBrowser1.Url = new System.Uri("https://www.estetika.com.pl/pl/porady/", System.UriKind.Absolute);
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DentalClinic.Properties.Resources.IMG_60291;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 536);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(434, 271);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // LogoGora
+            // 
+            this.LogoGora.Image = global::DentalClinic.Properties.Resources.estetika_dental_clinic_favicon_color;
+            this.LogoGora.InitialImage = null;
+            this.LogoGora.Location = new System.Drawing.Point(1298, 23);
+            this.LogoGora.Name = "LogoGora";
+            this.LogoGora.Size = new System.Drawing.Size(182, 119);
+            this.LogoGora.TabIndex = 3;
+            this.LogoGora.TabStop = false;
+            // 
             // Kontakt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1491, 859);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
@@ -184,6 +227,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).EndInit();
             this.ResumeLayout(false);
 
@@ -202,5 +246,8 @@
         private System.Windows.Forms.PictureBox LogoGora;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

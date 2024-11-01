@@ -24,8 +24,12 @@ namespace DentalClinic
             //database.CheckConnection();
 
 
-            //Application.Run(new LogowanieUz());
-            Application.Run(new GlownaStr());
+            LogowanieUz logowanieUz = new LogowanieUz(); // Tworzenie instancji LogowanieUz
+
+            // ... (kod do wywołania logowania)
+
+            Application.Run(new WizytaOmow(logowanieUz)); // Przekazywanie instancji logowania
+            //Application.Run(new GlownaStr());
         }
     }
 }

@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BD.cs" />
+    <Compile Include="BDwizyty.cs" />
     <Compile Include="Cennik.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +118,12 @@
     <Compile Include="WizytaOmow.Designer.cs">
       <DependentUpon>WizytaOmow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZapisWizyty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZapisWizyty.Designer.cs">
+      <DependentUpon>ZapisWizyty.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Cennik.resx">
       <DependentUpon>Cennik.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WizytaOmow.resx">
       <DependentUpon>WizytaOmow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZapisWizyty.resx">
+      <DependentUpon>ZapisWizyty.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -206,6 +216,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IMG_6242-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG_60291.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

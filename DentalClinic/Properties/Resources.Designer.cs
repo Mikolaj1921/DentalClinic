@@ -103,6 +103,16 @@ namespace DentalClinic.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IMG_60291 {
+            get {
+                object obj = ResourceManager.GetObject("IMG_60291", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IMG_6242_1 {
             get {
                 object obj = ResourceManager.GetObject("IMG_6242-1", resourceCulture);

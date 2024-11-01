@@ -12,6 +12,8 @@ namespace DentalClinic
         private string username;
         private string password;
 
+        public string UserName => username;
+
         public LogowanieUz()
         {
             InitializeComponent();
@@ -87,8 +89,9 @@ namespace DentalClinic
             if (AuthenticateUser(username, password))
             {
                 // Jeśli użytkownik jest zweryfikowany, otwórz główne okno
-                WizytaOmow wizForm = new WizytaOmow();
+                WizytaOmow wizForm = new WizytaOmow(this); // Przekazujemy `this` do WizytaOmow
                 wizForm.Show();
+                //this.Hide(); // Ukryj okno logowania
             }
             else
             {
@@ -105,6 +108,7 @@ namespace DentalClinic
         {
             GlownaStr glownaForm = new GlownaStr();
             glownaForm.ShowDialog();
+
         }
 
         private void button6_Click(object sender, EventArgs e)
