@@ -6,17 +6,13 @@ namespace DentalClinic
 {
     public partial class WizytaOmow : Form
     {
-
         private LogowanieUz logowanieUz;
-
 
         public WizytaOmow(LogowanieUz logowanieUz)
         {
             InitializeComponent();
             this.logowanieUz = logowanieUz; // Zapisz referencję do obiektu logowania
         }
-
-
 
         private void WizytaOmow_Load(object sender, EventArgs e)
         {
@@ -36,7 +32,6 @@ namespace DentalClinic
                 // Ustawienie widocznych kolumn w DataGridView
                 dataGridView1.Columns["ImieLekarza"].HeaderText = "Imię Lekarza";
                 dataGridView1.Columns["dataIczas"].HeaderText = "Data i Czas";
-
 
                 dataGridView1.Columns["ImieLekarza"].ReadOnly = true;
                 dataGridView1.Columns["dataIczas"].ReadOnly = true;
@@ -62,13 +57,16 @@ namespace DentalClinic
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns.Count - 1) // Ostatnia kolumna to przycisk
             {
+                // Pobranie ID wizyty z wybranego wiersza
+                long visitId = Convert.ToInt64(dataGridView1.Rows[e.RowIndex].Cells["id"].Value); // Pobranie ID wizyty
+
                 // Pobranie imienia lekarza i daty i czasu z wiersza
                 string imieLekarza = dataGridView1.Rows[e.RowIndex].Cells["ImieLekarza"].Value.ToString();
                 string dataIczas = dataGridView1.Rows[e.RowIndex].Cells["dataIczas"].Value.ToString();
 
                 // Tworzenie i otwieranie formularza ZapisWizyty
-                ZapisWizyty zapiswizytyForm = new ZapisWizyty(logowanieUz.UserName); // Przekazywanie UserName
-                zapiswizytyForm.LoadData(imieLekarza, dataIczas); // Przekazywanie danych do formularza
+                ZapisWizyty zapiswizytyForm = new ZapisWizyty(logowanieUz.UserName, visitId); // Przekazywanie UserName i ID wizyty
+                zapiswizytyForm.LoadData(imieLekarza, dataIczas , visitId); // Przekazywanie danych do formularza
                 zapiswizytyForm.Show(); // Wyświetlenie formularza
             }
         }
@@ -80,24 +78,16 @@ namespace DentalClinic
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void button7_Click(object sender, EventArgs e)
         {

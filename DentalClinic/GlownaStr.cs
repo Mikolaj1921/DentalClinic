@@ -112,5 +112,15 @@ namespace DentalClinic
         {
 
         }
+
+        private void ProfilUz_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ZadajPytanie_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

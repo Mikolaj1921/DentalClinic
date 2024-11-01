@@ -51,8 +51,8 @@ namespace DentalClinic
                     {
                         connection.Open(); // Otwieranie połączenia
 
-                        // Zmodyfikowane zapytanie SQL, aby pobierać tylko ImieLekarza i dataIczas
-                        string query = "SELECT ImieLekarza, dataIczas FROM Wizyty"; // Zapytanie SQL
+                        // Zapytanie SQL, aby pobierać id, ImieLekarza i dataIczas
+                        string query = "SELECT id, ImieLekarza, dataIczas FROM Wizyty"; // Upewnij się, że id jest w zapytaniu
 
                         using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, connection))
                         {
@@ -63,55 +63,14 @@ namespace DentalClinic
                     {
                         MessageBox.Show("Wystąpił błąd podczas pobierania wizyt: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    finally
-                    {
-                        // Zamknięcie połączenia
-                        connection.Close();
-                    }
                 }
                 return dtWizyty; // Zwrócenie DataTable z danymi wizyt
             }
 
-            // Metoda do pobierania danych pacjenta na podstawie nazwy użytkownika
-            public DataTable GetPatientDataByUserName(string userName)
-            {
-                DataTable dtPacjent = new DataTable();
-                using (SQLiteConnection connection = GetConnection())
-                {
-                    try
-                    {
-                        connection.Open(); // Otwieranie połączenia
-                        // Przyjmujemy, że tabela Pacjenci ma kolumny: Nazwisko, Imie, Wiek, Plec, UserName
-                        string query = "SELECT Nazwisko, Imie, Wiek, Plec FROM Uzytkownicy WHERE userName = @UserName"; // Zapytanie SQL
-
-                        using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                        {
-                            command.Parameters.AddWithValue("@UserName", userName); // Dodanie parametru do zapytania
-
-                            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
-                            {
-                                adapter.Fill(dtPacjent); // Wypełnienie DataTable danymi pacjenta
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Wystąpił błąd podczas pobierania danych pacjenta: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        // Zamknięcie połączenia
-                        connection.Close();
-                    }
-                }
-                return dtPacjent; // Zwrócenie DataTable z danymi pacjenta
-            }
+            
 
 
-
-
-
-
+            //zapis do Wizyty
 
             public void SaveVisit(string nazwisko, string imie, int wiek, string nrTelefonu, string email, string plec, string imieLekarza, DateTime dataIczas)
             {

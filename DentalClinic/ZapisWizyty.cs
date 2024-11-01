@@ -18,54 +18,33 @@ namespace DentalClinic
             this.visitId = visitId; // Zapisz ID wizyty
         }
 
-        // Metoda do ustawiania danych w kontrolkach
-        public void LoadData(string imieLekarza, string dataIczas)
+        //ladowanie danych lekarza i DT
+        public void LoadData(string imieLekarza, string dataIczas, long visitId)
         {
             // Ustawienie tekstu w odpowiednich kontrolkach
             labelImieLekarza.Text = $"Imię Lekarza: {imieLekarza}";
             labelDataICzas.Text = $"Data i Czas: {dataIczas}";
 
-            // Ładowanie danych pacjenta
-            LoadPatientData();
-        }
 
-        private void LoadPatientData()
-        {
-            BDwizyty.SQLiteDatabaseConnection dbConnection = new BDwizyty.SQLiteDatabaseConnection(); // Tworzenie instancji klasy połączenia z bazą
-            DataTable patientData = dbConnection.GetPatientDataByUserName(userName); // Pobieranie danych pacjenta
-
-            if (patientData.Rows.Count > 0)
-            {
-                // Zakładamy, że tabela zawiera kolumny: Nazwisko, Imie, Wiek, Plec
-                var row = patientData.Rows[0]; // Pobieramy pierwszy wiersz
-
-                NazwiskoPacjenta.Text = row["Nazwisko"].ToString();
-                ImiePacjenta.Text = row["Imie"].ToString();
-                WiekPacjenta.Text = row["Wiek"].ToString();
-                Plec.Text = row["Plec"].ToString();
-            }
-            else
-            {
-                MessageBox.Show("Nie znaleziono danych pacjenta.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            // W przypadku aktualizacji, pobierz dane wizyty i ID
+            // Ładowanie danych wizyty (jeśli potrzebne)
             if (visitId > 0)
             {
                 LoadVisitData(visitId);
             }
         }
 
-        private void LoadVisitData(long visitId)
+
+        //zaladoowanie bd danych
+        public void LoadVisitData(long visitId)
         {
             // Ładowanie danych wizyty z bazy danych na podstawie ID wizyty
             using (var connection = new SQLiteConnection(@"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;"))
             {
                 connection.Open();
-                string query = "SELECT * FROM Wizyty WHERE Id = @Id";
+                string query = "SELECT * FROM Wizyty WHERE id = @id"; // Użyj małej litery "id"
                 using (var command = new SQLiteCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Id", visitId);
+                    command.Parameters.AddWithValue("@id", visitId); // Użyj małej litery "id"
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -87,11 +66,13 @@ namespace DentalClinic
             }
         }
 
+        //wyjdz
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close(); // Zamknięcie formularza
         }
 
+        //akceptacja zapisu
         private void button1_Click(object sender, EventArgs e)
         {
             // Sprawdzenie, czy wszystkie pola zostały wypełnione
@@ -100,18 +81,18 @@ namespace DentalClinic
                 string.IsNullOrWhiteSpace(WiekPacjenta.Text) ||
                 string.IsNullOrWhiteSpace(NrTelefonuPacjenta.Text) ||
                 string.IsNullOrWhiteSpace(EmailPacjenta.Text) ||
-                string.IsNullOrWhiteSpace(Plec.Text))
+                string.IsNullOrWhiteSpace(Plec.Text) ||
+                string.IsNullOrWhiteSpace(OpiszProblem.Text)) // Upewnij się, że opis problemu jest też wypełniony
             {
                 MessageBox.Show("Proszę wypełnić wszystkie pola przed zapisaniem wizyty.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Zatrzymaj wykonanie, jeśli nie wszystkie pola są wypełnione
             }
-            else
-            {
-                // Wywołanie metody zapisu wizyty
-                SaveVisit();
-            }
+
+            // Wywołanie metody zapisu wizyty
+            SaveVisit();
         }
 
+        //Zapis wizyt do bazy
         private void SaveVisit()
         {
             try
@@ -119,7 +100,13 @@ namespace DentalClinic
                 // Przygotowanie danych do zapisania wizyty
                 string nazwisko = NazwiskoPacjenta.Text;
                 string imie = ImiePacjenta.Text;
-                int wiek = int.Parse(WiekPacjenta.Text);
+                int wiek;
+                if (!int.TryParse(WiekPacjenta.Text, out wiek))
+                {
+                    MessageBox.Show("Proszę wprowadzić poprawny wiek.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Zatrzymaj wykonanie, jeśli wiek jest niepoprawny
+                }
+
                 string nrTelefonu = NrTelefonuPacjenta.Text;
                 string email = EmailPacjenta.Text;
                 string plec = Plec.Text;
@@ -139,7 +126,7 @@ namespace DentalClinic
                         // Wykonaj aktualizację wizyty
                         string updateQuery = "UPDATE Wizyty SET NazwiskoPacjenta = @NazwiskoPacjenta, OpisProblemu = @OpisProblemu, ImiePacjenta = @ImiePacjenta, " +
                                              "WiekPacjenta = @WiekPacjenta, NrTelKlienta = @NrTelKlienta, MailKlienta = @MailKlienta, PlecP = @PlecP, ImieLekarza = @ImieLekarza, DataICzas = @DataICzas " +
-                                             "WHERE Id = @Id";
+                                             "WHERE id = @id"; // Użyj małej litery "id"
 
                         using (var updateCommand = new SQLiteCommand(updateQuery, connection))
                         {
@@ -152,7 +139,7 @@ namespace DentalClinic
                             updateCommand.Parameters.AddWithValue("@PlecP", plec);
                             updateCommand.Parameters.AddWithValue("@ImieLekarza", imieLekarza);
                             updateCommand.Parameters.AddWithValue("@DataICzas", dataIczas);
-                            updateCommand.Parameters.AddWithValue("@Id", visitId); // Użycie ID wizyty do aktualizacji
+                            updateCommand.Parameters.AddWithValue("@id", visitId); // Użycie małej litery "id"
 
                             updateCommand.ExecuteNonQuery(); // Wykonaj aktualizację
                         }
@@ -169,7 +156,7 @@ namespace DentalClinic
                             insertCommand.Parameters.AddWithValue("@OpisProblemu", opisProblemu);
                             insertCommand.Parameters.AddWithValue("@ImiePacjenta", imie);
                             insertCommand.Parameters.AddWithValue("@WiekPacjenta", wiek);
-                            insertCommand.Parameters.AddWithValue("@NrTelKlienta", nrTelefonu);
+                            insertCommand.Parameters.AddWithValue("@NrTelKlienta", nrTelefonu); // Dodanie numeru telefonu
                             insertCommand.Parameters.AddWithValue("@MailKlienta", email);
                             insertCommand.Parameters.AddWithValue("@PlecP", plec);
                             insertCommand.Parameters.AddWithValue("@ImieLekarza", imieLekarza);
@@ -178,35 +165,21 @@ namespace DentalClinic
                             insertCommand.ExecuteNonQuery(); // Wykonaj wstawienie
                         }
                     }
-                }
 
-                MessageBox.Show("Wizyta została pomyślnie zapisana!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close(); // Zamknij formularz po zapisaniu wizyty
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Proszę wprowadzić poprawny wiek.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Dane wizyty zostały zapisane pomyślnie.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Wystąpił błąd podczas zapisywania wizyty: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine(ex.StackTrace); // Wypisz więcej szczegółów błędu
+                MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
-        private void ZapisWizyty_Load(object sender, EventArgs e)
-        {
-            // Możliwe, że chcesz tutaj dodać kod inicjalizujący
-        }
-
+        private void ZapisWizyty_Load(object sender, EventArgs e){}
         private void labelImieLekarza_TextChanged(object sender, EventArgs e) { }
-
         private void labelDataICzas_TextChanged(object sender, EventArgs e) { }
-
         private void OpiszProblem_TextChanged(object sender, EventArgs e) { }
-
-        // Inne metody i zdarzenia
         private void NazwiskoPacjenta_TextChanged(object sender, EventArgs e) { }
         private void ImiePacjenta_TextChanged(object sender, EventArgs e) { }
         private void WiekPacjenta_TextChanged(object sender, EventArgs e) { }

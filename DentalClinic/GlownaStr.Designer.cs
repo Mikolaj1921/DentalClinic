@@ -41,11 +41,12 @@
             this.Tekst1 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ProfilUz = new System.Windows.Forms.Button();
+            this.ZadajPytanie = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).BeginInit();
             this.panel2.SuspendLayout();
@@ -192,23 +193,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1151, 202);
+            this.button1.Location = new System.Drawing.Point(1151, 276);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(247, 40);
             this.button1.TabIndex = 8;
             this.button1.Text = "Umów się na wizytę do lekarza";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1151, 259);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(247, 40);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Sprawdź wolne terminy wizyty";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox4
             // 
@@ -246,12 +237,33 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // ProfilUz
+            // 
+            this.ProfilUz.Location = new System.Drawing.Point(1151, 202);
+            this.ProfilUz.Name = "ProfilUz";
+            this.ProfilUz.Size = new System.Drawing.Size(247, 40);
+            this.ProfilUz.TabIndex = 9;
+            this.ProfilUz.Text = "Twój Profil";
+            this.ProfilUz.UseVisualStyleBackColor = true;
+            this.ProfilUz.Click += new System.EventHandler(this.ProfilUz_Click);
+            // 
+            // ZadajPytanie
+            // 
+            this.ZadajPytanie.Location = new System.Drawing.Point(1151, 351);
+            this.ZadajPytanie.Name = "ZadajPytanie";
+            this.ZadajPytanie.Size = new System.Drawing.Size(247, 40);
+            this.ZadajPytanie.TabIndex = 10;
+            this.ZadajPytanie.Text = "Zadaj pytanie";
+            this.ZadajPytanie.UseVisualStyleBackColor = true;
+            this.ZadajPytanie.Click += new System.EventHandler(this.ZadajPytanie_Click);
+            // 
             // GlownaStr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1491, 859);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.ZadajPytanie);
+            this.Controls.Add(this.ProfilUz);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
@@ -294,11 +306,12 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button ProfilUz;
+        private System.Windows.Forms.Button ZadajPytanie;
     }
 }
