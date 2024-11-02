@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -163,6 +164,63 @@ namespace DentalClinic
         private void button7_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+            Color colorStart = Color.FromArgb(215, 215, 220);
+            Color colorEnd = Color.FromArgb(180, 180, 180);
+
+            // Tworzenie zaokrąglonego prostokąta
+            int cornerRadius = 20;
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, cornerRadius, cornerRadius, 180, 90);
+            path.AddArc(panel3.Width - cornerRadius, 0, cornerRadius, cornerRadius, 270, 90);
+            path.AddArc(panel3.Width - cornerRadius, panel3.Height - cornerRadius, cornerRadius, cornerRadius, 0, 90);
+            path.AddArc(0, panel3.Height - cornerRadius, cornerRadius, cornerRadius, 90, 90);
+            path.CloseFigure();
+
+            panel3.Region = new Region(path);
+
+            // Gradient tła
+            using (LinearGradientBrush brush = new LinearGradientBrush(panel3.ClientRectangle, colorStart, colorEnd, LinearGradientMode.Vertical))
+            {
+                e.Graphics.FillPath(brush, path);
+            }
+        }
+
+        private void nadpiszalozkontoo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Kontakt kontaktForm = new Kontakt();
+            kontaktForm.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Cennik cennikForm = new Cennik();
+            cennikForm.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DlaczegoMy dlaczegomyForm = new DlaczegoMy();
+            dlaczegomyForm.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ONas onasForm = new ONas();
+            onasForm.ShowDialog();
         }
     }
 }

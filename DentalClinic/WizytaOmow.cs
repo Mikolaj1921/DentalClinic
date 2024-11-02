@@ -23,11 +23,11 @@ namespace DentalClinic
             // Pobieranie wizyt z bazy danych
             DataTable wizyty = dbConnection.GetWizyty();
 
-            // Sprawdzenie, czy są jakieś wizyty
+            // Sprawdzenie, czy są jakieś wizyty po pobraniu
             if (wizyty.Rows.Count > 0)
             {
                 // Ustawianie DataSource dla DataGridView
-                dataGridView1.DataSource = wizyty.DefaultView;
+                dataGridView1.DataSource = wizyty;
 
                 // Ustawienie widocznych kolumn w DataGridView
                 dataGridView1.Columns["ImieLekarza"].HeaderText = "Imię Lekarza";
@@ -35,6 +35,9 @@ namespace DentalClinic
 
                 dataGridView1.Columns["ImieLekarza"].ReadOnly = true;
                 dataGridView1.Columns["dataIczas"].ReadOnly = true;
+
+                // Ukrycie kolumny "id"
+                dataGridView1.Columns["id"].Visible = false;
 
                 // Dodanie kolumny przycisku
                 DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
@@ -45,13 +48,21 @@ namespace DentalClinic
 
                 // Opcjonalnie: Ustawienie trybu automatycznego dopasowania kolumn
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                // Ustawienie, aby nie pozwalać na dodawanie wierszy
+                dataGridView1.AllowUserToAddRows = false; // Dodano tę linię
             }
             else
             {
                 // Jeśli nie ma wizyt, informujemy użytkownika
                 MessageBox.Show("Brak wizyt w bazie danych.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridView1.DataSource = null; // Wyczyszczenie DataGridView
             }
         }
+
+
+
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -78,20 +89,37 @@ namespace DentalClinic
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {}
+        {
+            ONas onasForm = new ONas();
+            onasForm.ShowDialog();
+        }
 
         private void button4_Click(object sender, EventArgs e)
-        {}
+        {
+            DlaczegoMy dlaczegomyForm = new DlaczegoMy();
+            dlaczegomyForm.ShowDialog();
+        }
 
         private void button5_Click(object sender, EventArgs e)
-        {}
+        {
+            Cennik cennikForm = new Cennik();
+            cennikForm.ShowDialog();
+        }
 
         private void button6_Click(object sender, EventArgs e)
-        {}
+        {
+            Kontakt kontaktForm = new Kontakt();
+            kontaktForm.ShowDialog();
+        }
 
         private void button7_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

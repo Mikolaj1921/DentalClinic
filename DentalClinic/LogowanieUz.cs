@@ -2,6 +2,8 @@
 using System.Data;
 //using System.Data.OleDb;
 using System.Data.SQLite;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DentalClinic
@@ -29,12 +31,14 @@ namespace DentalClinic
             this.Close(); // Zamknij okno logowania
         }
 
+        /*
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+
             Register regForm = new Register();
             regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny 
             this.Close(); // Zamknij okno logowania
-        }
+        }*/
 
 
 
@@ -139,6 +143,41 @@ namespace DentalClinic
         private void button7_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+            Color colorStart = Color.FromArgb(215,215,220);
+            Color colorEnd = Color.FromArgb(180, 180, 180);
+
+            // Tworzenie zaokrąglonego prostokąta
+            int cornerRadius = 20;
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, cornerRadius, cornerRadius, 180, 90);
+            path.AddArc(panel3.Width - cornerRadius, 0, cornerRadius, cornerRadius, 270, 90);
+            path.AddArc(panel3.Width - cornerRadius, panel3.Height - cornerRadius, cornerRadius, cornerRadius, 0, 90);
+            path.AddArc(0, panel3.Height - cornerRadius, cornerRadius, cornerRadius, 90, 90);
+            path.CloseFigure();
+
+            panel3.Region = new Region(path);
+
+            // Gradient tła
+            using (LinearGradientBrush brush = new LinearGradientBrush(panel3.ClientRectangle, colorStart, colorEnd, LinearGradientMode.Vertical))
+            {
+                e.Graphics.FillPath(brush, path);
+            }
+        }
+
+        private void Register_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register registerForm = new Register();
+            registerForm.ShowDialog();
+            this.Close(); // Zamknij okno logowania
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

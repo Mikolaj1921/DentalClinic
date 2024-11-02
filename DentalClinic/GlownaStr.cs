@@ -115,12 +115,14 @@ namespace DentalClinic
 
         private void ProfilUz_Click(object sender, EventArgs e)
         {
-
+            TwojProfil twojprofilForm = new TwojProfil();
+            twojprofilForm.ShowDialog();
         }
 
         private void ZadajPytanie_Click(object sender, EventArgs e)
         {
-
+            ZadajPytanie zadajForm = new ZadajPytanie();
+            zadajForm.ShowDialog();
         }
     }
 }

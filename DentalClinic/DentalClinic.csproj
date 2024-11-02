@@ -112,11 +112,23 @@
     <Compile Include="Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
+    <Compile Include="TwojProfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TwojProfil.Designer.cs">
+      <DependentUpon>TwojProfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="WizytaOmow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WizytaOmow.Designer.cs">
       <DependentUpon>WizytaOmow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ZadajPytanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZadajPytanie.Designer.cs">
+      <DependentUpon>ZadajPytanie.cs</DependentUpon>
     </Compile>
     <Compile Include="ZapisWizyty.cs">
       <SubType>Form</SubType>
@@ -155,8 +167,14 @@
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TwojProfil.resx">
+      <DependentUpon>TwojProfil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WizytaOmow.resx">
       <DependentUpon>WizytaOmow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZadajPytanie.resx">
+      <DependentUpon>ZadajPytanie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ZapisWizyty.resx">
       <DependentUpon>ZapisWizyty.cs</DependentUpon>

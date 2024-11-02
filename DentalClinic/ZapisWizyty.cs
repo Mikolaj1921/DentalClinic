@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DentalClinic
@@ -16,15 +18,18 @@ namespace DentalClinic
             InitializeComponent();
             this.userName = userName; // Zapisz UserName
             this.visitId = visitId; // Zapisz ID wizyty
+
+            // Dodanie elementów do CheckedListBox
+            //WyborPlec.Items.Add("Mężczyzna");
+            //WyborPlec.Items.Add("Kobieta");
         }
 
-        //ladowanie danych lekarza i DT
+        // Ładowanie danych lekarza i DT
         public void LoadData(string imieLekarza, string dataIczas, long visitId)
         {
             // Ustawienie tekstu w odpowiednich kontrolkach
-            labelImieLekarza.Text = $"Imię Lekarza: {imieLekarza}";
-            labelDataICzas.Text = $"Data i Czas: {dataIczas}";
-
+            labelImieLekarza.Text = imieLekarza;
+            labelDataICzas.Text = dataIczas;
 
             // Ładowanie danych wizyty (jeśli potrzebne)
             if (visitId > 0)
@@ -33,11 +38,9 @@ namespace DentalClinic
             }
         }
 
-
-        //zaladoowanie bd danych
+        // Ładowanie danych wizyty z bazy danych na podstawie ID wizyty
         public void LoadVisitData(long visitId)
         {
-            // Ładowanie danych wizyty z bazy danych na podstawie ID wizyty
             using (var connection = new SQLiteConnection(@"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;"))
             {
                 connection.Open();
@@ -54,7 +57,18 @@ namespace DentalClinic
                             WiekPacjenta.Text = reader["WiekPacjenta"].ToString();
                             NrTelefonuPacjenta.Text = reader["NrTelKlienta"].ToString();
                             EmailPacjenta.Text = reader["MailKlienta"].ToString();
-                            Plec.Text = reader["PlecP"].ToString();
+
+                            // Ustawienie wybranej płci w CheckedListBox
+                            string plec = reader["PlecP"].ToString();
+                            if (plec == "Mężczyzna")
+                            {
+                                WyborPlec.SetItemChecked(0, true);
+                            }
+                            else if (plec == "Kobieta")
+                            {
+                                WyborPlec.SetItemChecked(1, true);
+                            }
+
                             OpiszProblem.Text = reader["OpisProblemu"].ToString();
                         }
                         else
@@ -66,13 +80,13 @@ namespace DentalClinic
             }
         }
 
-        //wyjdz
+        // Wyjście
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close(); // Zamknięcie formularza
         }
 
-        //akceptacja zapisu
+        // Akceptacja zapisu
         private void button1_Click(object sender, EventArgs e)
         {
             // Sprawdzenie, czy wszystkie pola zostały wypełnione
@@ -81,7 +95,7 @@ namespace DentalClinic
                 string.IsNullOrWhiteSpace(WiekPacjenta.Text) ||
                 string.IsNullOrWhiteSpace(NrTelefonuPacjenta.Text) ||
                 string.IsNullOrWhiteSpace(EmailPacjenta.Text) ||
-                string.IsNullOrWhiteSpace(Plec.Text) ||
+                WyborPlec.CheckedItems.Count == 0 || // Sprawdzenie, czy wybrano płeć
                 string.IsNullOrWhiteSpace(OpiszProblem.Text)) // Upewnij się, że opis problemu jest też wypełniony
             {
                 MessageBox.Show("Proszę wypełnić wszystkie pola przed zapisaniem wizyty.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -92,7 +106,7 @@ namespace DentalClinic
             SaveVisit();
         }
 
-        //Zapis wizyt do bazy
+        // Zapis wizyt do bazy
         private void SaveVisit()
         {
             try
@@ -109,7 +123,7 @@ namespace DentalClinic
 
                 string nrTelefonu = NrTelefonuPacjenta.Text;
                 string email = EmailPacjenta.Text;
-                string plec = Plec.Text;
+                string plec = WyborPlec.CheckedItems.Count > 0 ? WyborPlec.CheckedItems[0].ToString() : ""; // Pobieranie wybranej płci
                 string opisProblemu = OpiszProblem.Text;
 
                 // Wyciąganie imienia lekarza i daty wizyty z etykiet
@@ -165,17 +179,21 @@ namespace DentalClinic
                             insertCommand.ExecuteNonQuery(); // Wykonaj wstawienie
                         }
                     }
-
-                    MessageBox.Show("Dane wizyty zostały zapisane pomyślnie.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                // Informacja o pomyślnym zapisie
+                MessageBox.Show("Wizyta została pomyślnie zapisana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close(); // Zamknięcie formularza po zapisie
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Wystąpił błąd podczas zapisywania wizyty: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
+        
+        private void WyborPlec_SelectedIndexChanged(object sender, EventArgs e){}
         private void ZapisWizyty_Load(object sender, EventArgs e){}
         private void labelImieLekarza_TextChanged(object sender, EventArgs e) { }
         private void labelDataICzas_TextChanged(object sender, EventArgs e) { }
@@ -185,6 +203,60 @@ namespace DentalClinic
         private void WiekPacjenta_TextChanged(object sender, EventArgs e) { }
         private void NrTelefonuPacjenta_TextChanged(object sender, EventArgs e) { }
         private void EmailPacjenta_TextChanged(object sender, EventArgs e) { }
-        private void Plec_TextChanged(object sender, EventArgs e) { }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+            Color colorStart = Color.FromArgb(195, 195, 190);
+            Color colorEnd = Color.FromArgb(180, 180, 180);
+
+            // Tworzenie zaokrąglonego prostokąta
+            int cornerRadius = 20;
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, cornerRadius, cornerRadius, 180, 90);
+            path.AddArc(panel3.Width - cornerRadius, 0, cornerRadius, cornerRadius, 270, 90);
+            path.AddArc(panel3.Width - cornerRadius, panel3.Height - cornerRadius, cornerRadius, cornerRadius, 0, 90);
+            path.AddArc(0, panel3.Height - cornerRadius, cornerRadius, cornerRadius, 90, 90);
+            path.CloseFigure();
+
+            panel3.Region = new Region(path);
+
+            // Gradient tła
+            using (LinearGradientBrush brush = new LinearGradientBrush(panel3.ClientRectangle, colorStart, colorEnd, LinearGradientMode.Vertical))
+            {
+                e.Graphics.FillPath(brush, path);
+            }
+        }
+
+        private void OpiszProblem_TextChanged_2(object sender, EventArgs e){}
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            GlownaStr glownaForm = new GlownaStr();
+            glownaForm.ShowDialog();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            ONas onasForm = new ONas();
+            onasForm.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DlaczegoMy dlaczegomyForm = new DlaczegoMy();
+            dlaczegomyForm.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Cennik cennikForm = new Cennik();
+            cennikForm.ShowDialog();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Kontakt kontaktForm = new Kontakt();
+            kontaktForm.ShowDialog();
+        }
     }
 }

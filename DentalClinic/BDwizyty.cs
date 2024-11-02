@@ -31,7 +31,7 @@ namespace DentalClinic
                     catch (Exception ex)
                     {
                         // Obsługa błędów
-                        MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -51,8 +51,16 @@ namespace DentalClinic
                     {
                         connection.Open(); // Otwieranie połączenia
 
-                        // Zapytanie SQL, aby pobierać id, ImieLekarza i dataIczas
-                        string query = "SELECT id, ImieLekarza, dataIczas FROM Wizyty"; // Upewnij się, że id jest w zapytaniu
+                        // Zapytanie SQL, aby pobierać tylko wiersze, gdzie ImieLekarza i dataIczas są wypełnione,
+                        // a pozostałe kolumny są puste
+                        string query = @"
+                            SELECT id, ImieLekarza, dataIczas 
+                            FROM Wizyty 
+                            WHERE ImieLekarza IS NOT NULL AND ImieLekarza <> '' 
+                            AND dataIczas IS NOT NULL AND dataIczas <> ''
+                            AND (ImiePacjenta IS NULL OR ImiePacjenta = '')
+                            AND (NazwiskoPacjenta IS NULL OR NazwiskoPacjenta = '')";
+                
 
                         using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, connection))
                         {
@@ -61,13 +69,16 @@ namespace DentalClinic
                     }
                     catch (Exception ex)
                     {
+                        // Obsługa błędów
                         MessageBox.Show("Wystąpił błąd podczas pobierania wizyt: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 return dtWizyty; // Zwrócenie DataTable z danymi wizyt
             }
 
-            
+
+
+
 
 
             //zapis do Wizyty
@@ -132,7 +143,7 @@ namespace DentalClinic
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
