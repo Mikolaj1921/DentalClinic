@@ -43,10 +43,10 @@
             this.LogoGora = new System.Windows.Forms.PictureBox();
             this.button7 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.nadpisPassword = new System.Windows.Forms.Label();
             this.nadpisUserName = new System.Windows.Forms.Label();
             this.Register = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -81,7 +81,7 @@
             this.Login.MaximumSize = new System.Drawing.Size(329, 40);
             this.Login.MinimumSize = new System.Drawing.Size(329, 30);
             this.Login.Name = "Login";
-            this.Login.Size = new System.Drawing.Size(329, 30);
+            this.Login.Size = new System.Drawing.Size(329, 27);
             this.Login.TabIndex = 3;
             this.Login.TextChanged += new System.EventHandler(this.Login_TextChanged);
             // 
@@ -91,7 +91,7 @@
             this.Password.Location = new System.Drawing.Point(199, 463);
             this.Password.MinimumSize = new System.Drawing.Size(329, 30);
             this.Password.Name = "Password";
-            this.Password.Size = new System.Drawing.Size(329, 30);
+            this.Password.Size = new System.Drawing.Size(329, 27);
             this.Password.TabIndex = 4;
             this.Password.TextChanged += new System.EventHandler(this.Password_TextChanged);
             // 
@@ -221,6 +221,19 @@
             this.panel3.TabIndex = 12;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(131, 60);
+            this.label1.MinimumSize = new System.Drawing.Size(150, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(150, 25);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "USER LOGIN";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // nadpisPassword
             // 
             this.nadpisPassword.AutoSize = true;
@@ -254,19 +267,6 @@
             this.Register.TabStop = true;
             this.Register.Text = "Zarejestruj się";
             this.Register.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Register_LinkClicked_1);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(131, 60);
-            this.label1.MinimumSize = new System.Drawing.Size(150, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 25);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "USER LOGIN";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // webBrowser1
             // 
