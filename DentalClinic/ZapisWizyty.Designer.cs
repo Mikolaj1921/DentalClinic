@@ -255,7 +255,7 @@
             this.NazwiskoPacjenta.MaximumSize = new System.Drawing.Size(200, 30);
             this.NazwiskoPacjenta.MinimumSize = new System.Drawing.Size(200, 30);
             this.NazwiskoPacjenta.Name = "NazwiskoPacjenta";
-            this.NazwiskoPacjenta.Size = new System.Drawing.Size(200, 22);
+            this.NazwiskoPacjenta.Size = new System.Drawing.Size(200, 30);
             this.NazwiskoPacjenta.TabIndex = 29;
             this.NazwiskoPacjenta.TextChanged += new System.EventHandler(this.NazwiskoPacjenta_TextChanged);
             // 

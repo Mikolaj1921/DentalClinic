@@ -28,12 +28,12 @@ namespace DentalClinic
                     try
                     {
                         connection.Open(); // Otwieranie połączenia
-                        MessageBox.Show("Połączenie z bazą danych zostało nawiązane pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("Połączenie z bazą danych zostało nawiązane pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
                         // Obsługa błędów
-                        MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -66,12 +66,12 @@ namespace DentalClinic
                             command.Parameters.AddWithValue("@Password", password);
 
                             command.ExecuteNonQuery();
-                            MessageBox.Show("Użytkownik dodany pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //MessageBox.Show("Użytkownik dodany pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas dodawania użytkownika: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas dodawania użytkownika: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -97,41 +97,18 @@ namespace DentalClinic
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas pobierania użytkowników: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas pobierania użytkowników: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
                 return usersTable;
             }
 
-            // Metoda do usuwania użytkownika
-            public void DeleteUser(string email)
-            {
-                using (SQLiteConnection connection = GetConnection())
-                {
-                    try
-                    {
-                        connection.Open();
-                        using (SQLiteCommand command = new SQLiteCommand("DELETE FROM Users WHERE Email = @Email", connection))
-                        {
-                            command.Parameters.AddWithValue("@Email", email);
-                            int rowsAffected = command.ExecuteNonQuery();
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("Użytkownik usunięty pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Nie znaleziono użytkownika o podanym adresie e-mail.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Wystąpił błąd podczas usuwania użytkownika: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+
+
+
+
+
         }
     }
 }

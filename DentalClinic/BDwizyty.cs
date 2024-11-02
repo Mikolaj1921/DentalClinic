@@ -31,7 +31,7 @@ namespace DentalClinic
                     catch (Exception ex)
                     {
                         // Obsługa błędów
-                        MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -61,7 +61,7 @@ namespace DentalClinic
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas pobierania wizyt: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas pobierania wizyt: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 return dtWizyty; // Zwrócenie DataTable z danymi wizyt
@@ -132,7 +132,7 @@ namespace DentalClinic
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
