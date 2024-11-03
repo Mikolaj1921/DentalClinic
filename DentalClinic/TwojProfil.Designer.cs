@@ -39,9 +39,11 @@
             this.LogoGora = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button7
@@ -49,12 +51,13 @@
             this.button7.BackColor = System.Drawing.SystemColors.Control;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button7.ForeColor = System.Drawing.Color.DimGray;
-            this.button7.Location = new System.Drawing.Point(1343, 0);
+            this.button7.Location = new System.Drawing.Point(1360, -3);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(137, 26);
             this.button7.TabIndex = 20;
             this.button7.Text = "Zamknij";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // panel1
             // 
@@ -81,6 +84,7 @@
             this.button2.TabIndex = 14;
             this.button2.Text = "Główna";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -102,6 +106,7 @@
             this.button6.TabIndex = 12;
             this.button6.Text = "Kontakt";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -112,6 +117,7 @@
             this.button5.TabIndex = 11;
             this.button5.Text = "Cennik";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -122,17 +128,18 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "Dlaczego my?";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.button3.Enabled = false;
+            this.button3.BackColor = System.Drawing.SystemColors.Control;
             this.button3.Location = new System.Drawing.Point(397, 43);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(98, 40);
             this.button3.TabIndex = 9;
             this.button3.Text = "O nas";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // LogoGora
             // 
@@ -165,11 +172,22 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "estetika © 2024   |    realizacja: MM studio";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(44, 191);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // TwojProfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1491, 859);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -180,6 +198,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogoGora)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -197,5 +216,6 @@
         private System.Windows.Forms.PictureBox LogoGora;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

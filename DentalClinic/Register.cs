@@ -117,8 +117,15 @@ namespace DentalClinic
                 return;
             }
 
-            // Utworzenie instancji klasy SQLiteDatabaseConnection i dodanie użytkownika
+            // Utworzenie instancji klasy SQLiteDatabaseConnection i sprawdzenie dostępności UserName
             BD.SQLiteDatabaseConnection dbConnection = new BD.SQLiteDatabaseConnection();
+            if (!dbConnection.IsUserNameAvailable(userName))
+            {
+                MessageBox.Show("Nazwa użytkownika jest już zajęta. Wybierz inną.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Dodanie użytkownika do bazy danych
             try
             {
                 dbConnection.AddUser(imie, nazwisko, phoneNum, wiek, plec, userName, email, password);

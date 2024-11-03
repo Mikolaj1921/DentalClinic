@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using System.Data.SQLite; 
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace DentalClinic
@@ -9,36 +9,33 @@ namespace DentalClinic
     {
         public class SQLiteDatabaseConnection
         {
-            // Ciąg połączenia do bazy danych SQLite
             private string connectionString = @"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;";
 
-
-            // Metoda nawiązująca połączenie z bazą danych
             public SQLiteConnection GetConnection()
             {
-                SQLiteConnection connection = new SQLiteConnection(connectionString); 
-                return connection;
+                return new SQLiteConnection(connectionString);
             }
 
-            // Metoda do sprawdzenia połączenia
-            public void CheckConnection()
+            // Metoda do sprawdzenia unikalności UserName
+            public bool IsUserNameAvailable(string userName)
             {
                 using (SQLiteConnection connection = GetConnection())
                 {
                     try
                     {
-                        connection.Open(); // Otwieranie połączenia
-                        //MessageBox.Show("Połączenie z bazą danych zostało nawiązane pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        connection.Open();
+                        string query = "SELECT COUNT(*) FROM Uzytkownicy WHERE UserName = @UserName";
+                        using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@UserName", userName);
+                            int count = Convert.ToInt32(command.ExecuteScalar());
+                            return count == 0; // Zwraca true, jeśli UserName nie istnieje
+                        }
                     }
                     catch (Exception ex)
                     {
-                        // Obsługa błędów
-                        //MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        // Zamknięcie połączenia
-                        connection.Close();
+                        //MessageBox.Show("Wystąpił błąd podczas sprawdzania dostępności loginu: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false; // Zakładamy, że login nie jest dostępny w przypadku błędu
                     }
                 }
             }
@@ -51,11 +48,10 @@ namespace DentalClinic
                     try
                     {
                         connection.Open();
-                        using (SQLiteCommand command = new SQLiteCommand(
-                            "INSERT INTO Uzytkownicy (Imie, Nazwisko, Telephone, Wiek, Plec, UserName, Email, Password) " +
-                            "VALUES (@Imie, @Nazwisko, @Telephone, @Wiek, @Plec, @UserName, @Email, @Password)", connection))
+                        string query = "INSERT INTO Uzytkownicy (Imie, Nazwisko, Telephone, Wiek, Plec, UserName, Email, Password) " +
+                                       "VALUES (@Imie, @Nazwisko, @Telephone, @Wiek, @Plec, @UserName, @Email, @Password)";
+                        using (SQLiteCommand command = new SQLiteCommand(query, connection))
                         {
-                            // Przypisanie parametrów do kolumn
                             command.Parameters.AddWithValue("@Imie", imie);
                             command.Parameters.AddWithValue("@Nazwisko", nazwisko);
                             command.Parameters.AddWithValue("@Telephone", telephone);
@@ -66,7 +62,7 @@ namespace DentalClinic
                             command.Parameters.AddWithValue("@Password", password);
 
                             command.ExecuteNonQuery();
-                            //MessageBox.Show("Użytkownik dodany pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           // MessageBox.Show("Użytkownik dodany pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     catch (Exception ex)
@@ -75,7 +71,6 @@ namespace DentalClinic
                     }
                 }
             }
-
 
             // Metoda do pobierania danych użytkowników
             public DataTable GetUsers()
@@ -87,7 +82,8 @@ namespace DentalClinic
                     try
                     {
                         connection.Open();
-                        using (SQLiteCommand command = new SQLiteCommand("SELECT UserName, Email FROM Users", connection)) // Pobieramy tylko UserName i Email
+                        string query = "SELECT UserName, Email FROM Uzytkownicy";
+                        using (SQLiteCommand command = new SQLiteCommand(query, connection))
                         {
                             using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
                             {
@@ -104,11 +100,22 @@ namespace DentalClinic
                 return usersTable;
             }
 
-
-
-
-
-
+            // Metoda do sprawdzenia połączenia z bazą
+            public void CheckConnection()
+            {
+                using (SQLiteConnection connection = GetConnection())
+                {
+                    try
+                    {
+                        connection.Open();
+                        //MessageBox.Show("Połączenie z bazą danych zostało nawiązane pomyślnie!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        //MessageBox.Show("Wystąpił błąd podczas nawiązywania połączenia: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

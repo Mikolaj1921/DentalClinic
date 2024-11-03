@@ -63,6 +63,16 @@ namespace DentalClinic.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap est_icon {
+            get {
+                object obj = ResourceManager.GetObject("est-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap estetika_dental_clinic_favicon_color {
             get {
                 object obj = ResourceManager.GetObject("estetika-dental-clinic-favicon-color", resourceCulture);
