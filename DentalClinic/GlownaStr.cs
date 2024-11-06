@@ -113,10 +113,14 @@ namespace DentalClinic
 
         }
 
+        private int loggedUserId;
         private void ProfilUz_Click(object sender, EventArgs e)
         {
-            TwojProfil twojprofilForm = new TwojProfil();
-            twojprofilForm.ShowDialog();
+            LogowanieUz logowanieForm = new LogowanieUz();
+            logowanieForm.SetProfileClicked(true, loggedUserId);  // Ustaw flagę isProfileClicked na true i przekaż ID użytkownika
+
+            logowanieForm.ShowDialog(); // Użycie ShowDialog() zapewnia, że formularz będzie wyświetlany nad innymi
+
         }
 
         private void ZadajPytanie_Click(object sender, EventArgs e)

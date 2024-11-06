@@ -76,11 +76,13 @@ namespace DentalClinic
                 string dataIczas = dataGridView1.Rows[e.RowIndex].Cells["dataIczas"].Value.ToString();
 
                 // Tworzenie i otwieranie formularza ZapisWizyty
-                ZapisWizyty zapiswizytyForm = new ZapisWizyty(logowanieUz.UserName, visitId); // Przekazywanie UserName i ID wizyty
-                zapiswizytyForm.LoadData(imieLekarza, dataIczas , visitId); // Przekazywanie danych do formularza
-                zapiswizytyForm.Show(); // Wyświetlenie formularza
+                // Przekazywanie UserName i ID wizyty oraz ID użytkownika logowanego (logowanieUz.UserId)
+                ZapisWizyty zapiswizytyForm = new ZapisWizyty(logowanieUz.UserName, visitId, logowanieUz.UserId);
+                zapiswizytyForm.LoadData(imieLekarza, dataIczas, visitId); // Przekazywanie danych do formularza
+                zapiswizytyForm.ShowDialog(); // Wyświetlenie formularza
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -120,6 +122,11 @@ namespace DentalClinic
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
         }
     }
 }

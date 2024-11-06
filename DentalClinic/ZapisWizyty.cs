@@ -9,19 +9,18 @@ namespace DentalClinic
 {
     public partial class ZapisWizyty : Form
     {
-        private string userName; // Zmienna do przechowywania nazwy użytkownika
-        private long visitId; // Zmienna do przechowywania ID wizyty
 
-        // Konstruktor przyjmujący UserName i opcjonalnie ID wizyty
-        public ZapisWizyty(string userName, long visitId = 0)
+        private string userName;
+        private long visitId;
+        private int userId;
+
+        // Konstruktor z parametrami
+        public ZapisWizyty(string userName, long visitId, int userId)
         {
             InitializeComponent();
-            this.userName = userName; // Zapisz UserName
-            this.visitId = visitId; // Zapisz ID wizyty
-
-            // Dodanie elementów do CheckedListBox
-            //WyborPlec.Items.Add("Mężczyzna");
-            //WyborPlec.Items.Add("Kobieta");
+            this.userName = userName;
+            this.visitId = visitId;
+            this.userId = userId;
         }
 
         // Ładowanie danych lekarza i DT
@@ -192,7 +191,7 @@ namespace DentalClinic
         }
 
 
-        
+
         private void WyborPlec_SelectedIndexChanged(object sender, EventArgs e){}
         private void ZapisWizyty_Load(object sender, EventArgs e){}
         private void labelImieLekarza_TextChanged(object sender, EventArgs e) { }

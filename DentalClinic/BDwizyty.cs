@@ -83,7 +83,7 @@ namespace DentalClinic
 
             //zapis do Wizyty
 
-            public void SaveVisit(string nazwisko, string imie, int wiek, string nrTelefonu, string email, string plec, string imieLekarza, DateTime dataIczas)
+            public void SaveVisit(string nazwisko, string imie, int wiek, string nrTelefonu, string email, string plec, string imieLekarza, DateTime dataIczas, int idUsera)
             {
                 using (SQLiteConnection connection = GetConnection())
                 {
@@ -103,7 +103,7 @@ namespace DentalClinic
                                 // Pacjent już istnieje, wykonaj aktualizację
                                 string updateQuery = "UPDATE Wizyty SET NazwiskoPacjenta = @NazwiskoPacjenta, ImiePacjenta = @ImiePacjenta, " +
                                                      "WiekPacjenta = @WiekPacjenta, Email = @MailKlienta, PlecP = @PlecP, ImieLekarza = @ImieLekarza, " +
-                                                     "DataICzas = @DataICzas WHERE NrTelKlienta = @NrTelKlienta";
+                                                     "DataICzas = @DataICzas, idUsera = @idUsera WHERE NrTelKlienta = @NrTelKlienta";
 
                                 using (SQLiteCommand updateCommand = new SQLiteCommand(updateQuery, connection))
                                 {
@@ -115,6 +115,7 @@ namespace DentalClinic
                                     updateCommand.Parameters.AddWithValue("@ImieLekarza", imieLekarza);
                                     updateCommand.Parameters.AddWithValue("@DataICzas", dataIczas);
                                     updateCommand.Parameters.AddWithValue("@NrTelKlienta", nrTelefonu);
+                                    updateCommand.Parameters.AddWithValue("@idUsera", idUsera);  // Przypisanie idUsera
 
                                     updateCommand.ExecuteNonQuery(); // Wykonaj aktualizację
                                 }
@@ -122,8 +123,8 @@ namespace DentalClinic
                             else
                             {
                                 // Pacjent nie istnieje, wykonaj wstawienie
-                                string insertQuery = "INSERT INTO Wizyty (NazwiskoPacjenta, ImiePacjenta, WiekPacjenta, NrTelKlienta, MailKlienta, PlecP, ImieLekarza, DataICzas) " +
-                                                     "VALUES (@NazwiskoPacjenta, @ImiePacjenta, @WiekPacjenta, @NrTelKlienta, @MailKlienta, @PlecP, @ImieLekarza, @DataICzas)";
+                                string insertQuery = "INSERT INTO Wizyty (NazwiskoPacjenta, ImiePacjenta, WiekPacjenta, NrTelKlienta, MailKlienta, PlecP, ImieLekarza, DataICzas, idUsera) " +
+                                                     "VALUES (@NazwiskoPacjenta, @ImiePacjenta, @WiekPacjenta, @NrTelKlienta, @MailKlienta, @PlecP, @ImieLekarza, @DataICzas, @idUsera)";
 
                                 using (SQLiteCommand insertCommand = new SQLiteCommand(insertQuery, connection))
                                 {
@@ -135,6 +136,7 @@ namespace DentalClinic
                                     insertCommand.Parameters.AddWithValue("@PlecP", plec);
                                     insertCommand.Parameters.AddWithValue("@ImieLekarza", imieLekarza);
                                     insertCommand.Parameters.AddWithValue("@DataICzas", dataIczas);
+                                    insertCommand.Parameters.AddWithValue("@idUsera", idUsera);  // Przypisanie idUsera
 
                                     insertCommand.ExecuteNonQuery(); // Wykonaj wstawienie
                                 }
@@ -143,7 +145,7 @@ namespace DentalClinic
                     }
                     catch (Exception ex)
                     {
-                        //MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // MessageBox.Show("Wystąpił błąd podczas zapisywania wizyty: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -151,6 +153,7 @@ namespace DentalClinic
                     }
                 }
             }
+
 
 
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-//using System.Data.OleDb;
 using System.Data.SQLite;
 using System.Drawing.Drawing2D;
 using System.Drawing;
@@ -10,11 +9,19 @@ namespace DentalClinic
 {
     public partial class LogowanieUz : Form
     {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+
+
         // Zmienne do przechowywania danych logowania
         private string username;
         private string password;
 
-        public string UserName => username;
+        //public string UserName => username;
+
+        // Flaga, która śledzi, czy użytkownik kliknął "Profil Użytkownika"
+        private bool isProfileClicked = false;
+        private int loggedUserId; // ID zalogowanego użytkownika
 
         public LogowanieUz()
         {
@@ -31,17 +38,6 @@ namespace DentalClinic
             this.Close(); // Zamknij okno logowania
         }
 
-        /*
-        private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-            Register regForm = new Register();
-            regForm.ShowDialog(); // Otwórz formularz rejestracji jako modalny 
-            this.Close(); // Zamknij okno logowania
-        }*/
-
-
-
         private bool AuthenticateUser(string username, string password)
         {
             // Użycie SQLiteConnection z podanym ciągiem połączenia
@@ -50,15 +46,19 @@ namespace DentalClinic
                 try
                 {
                     connection.Open();
-                    string query = "SELECT COUNT(*) FROM Uzytkownicy WHERE UserName = @UserName AND Password = @Password";
+                    string query = "SELECT id FROM Uzytkownicy WHERE UserName = @UserName AND Password = @Password";
                     using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@UserName", username);
                         command.Parameters.AddWithValue("@Password", password);
 
-                        int count = Convert.ToInt32(command.ExecuteScalar()); // Zwróci liczbę dopasowanych użytkowników
-
-                        return count > 0; // Zwróci true, jeśli użytkownik istnieje
+                        object result = command.ExecuteScalar(); // Zwróci id użytkownika lub null
+                        if (result != null)
+                        {
+                            loggedUserId = Convert.ToInt32(result);
+                            return true;
+                        }
+                        return false; // Zwróci false, jeśli użytkownik nie istnieje
                     }
                 }
                 catch (Exception ex)
@@ -71,14 +71,19 @@ namespace DentalClinic
 
         private void Login_TextChanged(object sender, EventArgs e)
         {
-            // Uaktualnij zmienną username przy każdej zmianie w polu logowania
             username = Login.Text; // Zakładając, że masz TextBox o nazwie txtUsername
         }
 
         private void Password_TextChanged(object sender, EventArgs e)
         {
-            // Uaktualnij zmienną password przy każdej zmianie w polu hasła
             password = Password.Text; // Zakładając, że masz TextBox o nazwie txtPassword
+        }
+
+        // Metoda wywoływana, gdy użytkownik kliknie na "Profil Użytkownika"
+        public void SetProfileClicked(bool isClicked, int userId)
+        {
+            isProfileClicked = isClicked;  // Ustawienie flagi
+            loggedUserId = userId; // Ustawienie ID użytkownika (jeśli dostępne)
         }
 
         private void Zaloguj_Click(object sender, EventArgs e)
@@ -92,16 +97,56 @@ namespace DentalClinic
 
             if (AuthenticateUser(username, password))
             {
-                // Jeśli użytkownik jest zweryfikowany, otwórz główne okno
-                WizytaOmow wizForm = new WizytaOmow(this); // Przekazujemy `this` do WizytaOmow
-                wizForm.Show();
-                //this.Hide(); // Ukryj okno logowania
+                // Jeśli użytkownik jest zweryfikowany, pobierz jego UserId z bazy
+                int loggedUserId = GetUserId(username);
+
+                // Jeśli użytkownik kliknął Profil, przejdź do TwojProfil
+                if (isProfileClicked)
+                {
+                    // Przekaż UserId do TwojProfil
+                    TwojProfil twojProfilForm = new TwojProfil(loggedUserId);
+                    twojProfilForm.ShowDialog();
+                }
+                else
+                {
+                    // Jeśli nie, przenieś go do UmowWizyte
+                    WizytaOmow umowWizyteForm = new WizytaOmow(this);
+                    umowWizyteForm.ShowDialog();
+                    //umowWizyteForm.BringToFront();
+                }
+
+                
             }
             else
             {
                 MessageBox.Show("Niepoprawna nazwa użytkownika lub hasło.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private int GetUserId(string username)
+        {
+            int userId = 0;
+
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;"))
+            {
+                conn.Open();
+                string query = "SELECT Id FROM Uzytkownicy WHERE UserName = @UserName";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserName", username);
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        userId = Convert.ToInt32(result);
+                    }
+                }
+            }
+
+            return userId;
+        }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -112,7 +157,6 @@ namespace DentalClinic
         {
             GlownaStr glownaForm = new GlownaStr();
             glownaForm.ShowDialog();
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -124,7 +168,6 @@ namespace DentalClinic
         private void button5_Click(object sender, EventArgs e)
         {
             Cennik cennikForm = new Cennik();
-
             cennikForm.ShowDialog();
         }
 
@@ -147,7 +190,7 @@ namespace DentalClinic
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
-            Color colorStart = Color.FromArgb(215,215,220);
+            Color colorStart = Color.FromArgb(215, 215, 220);
             Color colorEnd = Color.FromArgb(180, 180, 180);
 
             // Tworzenie zaokrąglonego prostokąta
@@ -175,9 +218,9 @@ namespace DentalClinic
             this.Close(); // Zamknij okno logowania
         }
 
+
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
