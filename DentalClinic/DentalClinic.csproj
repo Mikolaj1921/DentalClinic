@@ -76,6 +76,12 @@
     <Compile Include="Cennik.Designer.cs">
       <DependentUpon>Cennik.cs</DependentUpon>
     </Compile>
+    <Compile Include="comment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="comment.Designer.cs">
+      <DependentUpon>comment.cs</DependentUpon>
+    </Compile>
     <Compile Include="DlaczegoMy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </Compile>
     <EmbeddedResource Include="Cennik.resx">
       <DependentUpon>Cennik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="comment.resx">
+      <DependentUpon>comment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DlaczegoMy.resx">
       <DependentUpon>DlaczegoMy.cs</DependentUpon>

@@ -9,7 +9,7 @@ namespace DentalClinic
 {
     public partial class LogowanieUz : Form
     {
-        public int UserId { get; set; }
+        public int UserId { get; set; } // Dodaj właściwość UserId
         public string UserName { get; set; }
 
 
@@ -95,6 +95,7 @@ namespace DentalClinic
                 return;
             }
 
+
             if (AuthenticateUser(username, password))
             {
                 // Jeśli użytkownik jest zweryfikowany, pobierz jego UserId z bazy
@@ -109,13 +110,13 @@ namespace DentalClinic
                 }
                 else
                 {
-                    // Jeśli nie, przenieś go do UmowWizyte
-                    WizytaOmow umowWizyteForm = new WizytaOmow(this);
+
+                    // Przekazujemy UserId do formularza WizytaOmow
+                    WizytaOmow umowWizyteForm = new WizytaOmow(this,loggedUserId);
                     umowWizyteForm.ShowDialog();
-                    //umowWizyteForm.BringToFront();
                 }
 
-                
+
             }
             else
             {

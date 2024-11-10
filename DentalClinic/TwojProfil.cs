@@ -19,6 +19,10 @@ namespace DentalClinic
         {
             InitializeComponent();
             loggedUserId = userId;
+
+            // Ładowanie danych użytkownika i historii wizyt
+            LoadUserData();
+            LoadVisitHistory();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -81,10 +85,6 @@ namespace DentalClinic
         {
         }
 
-        private void Plec_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
         private void NrTelefonu_TextChanged(object sender, EventArgs e)
         {
         }
@@ -97,17 +97,100 @@ namespace DentalClinic
         {
         }
 
-        private void Haslo_TextChanged(object sender, EventArgs e)
+        private void Password_TextChanged(object sender, EventArgs e)
         {
         }
 
         private void ZapiszDane_Click(object sender, EventArgs e)
         {
+            string connectionString = @"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;";
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE Uzytkownicy SET Imie = @Imie, Nazwisko = @Nazwisko, Wiek = @Wiek, Telephone = @Telephone, Email = @Email, UserName = @UserName, Password = @Password WHERE Id = @Id";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Imie", ImieUz.Text);
+                    cmd.Parameters.AddWithValue("@Nazwisko", NazwiskoUz.Text);
+                    cmd.Parameters.AddWithValue("@Wiek", Wiek.Text);
+                    cmd.Parameters.AddWithValue("@Telephone", NrTelefonu.Text);
+                    cmd.Parameters.AddWithValue("@Email", Email.Text);
+                    cmd.Parameters.AddWithValue("@UserName", UserName.Text);
+                    cmd.Parameters.AddWithValue("@Password", Haslo.Text);
+                    cmd.Parameters.AddWithValue("@Id", loggedUserId);
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Dane zostały zaktualizowane.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wystąpił błąd podczas aktualizacji danych.");
+                    }
+                }
+            }
         }
 
         private void UsunKonto_Click(object sender, EventArgs e)
         {
+            var confirmResult = MessageBox.Show("Czy na pewno chcesz usunąć swoje konto?", "Potwierdzenie usunięcia", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                string connectionString = @"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;";
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM Uzytkownicy WHERE Id = @Id";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", loggedUserId);
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Konto zostało usunięte.");
+                            this.Close(); // Zamyka aplikację po usunięciu konta
+                        }
+                        else
+                        {
+                            MessageBox.Show("Wystąpił błąd podczas usuwania konta.");
+                        }
+                    }
+                }
+            }
         }
+
+        private void LoadUserData()
+        {
+            string connectionString = @"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;";
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT Imie, Nazwisko, Wiek, Telephone, Email, UserName, Password FROM Uzytkownicy WHERE Id = @Id";
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", loggedUserId);
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ImieUz.Text = reader["Imie"].ToString();
+                            NazwiskoUz.Text = reader["Nazwisko"].ToString();
+                            Wiek.Text = reader["Wiek"].ToString();
+                            NrTelefonu.Text = reader["Telephone"].ToString();
+                            Email.Text = reader["Email"].ToString();
+                            UserName.Text = reader["UserName"].ToString();
+                            Haslo.Text = reader["Password"].ToString();
+
+                        }
+                    }
+                }
+            }
+        }
+
 
         private void LoadVisitHistory()
         {
@@ -116,7 +199,7 @@ namespace DentalClinic
             {
                 conn.Open();
 
-                string query = "SELECT NazwiskoPacjenta, ImiePacjenta, WiekPacjenta, NrTelKlienta, MailKlienta, PlecP, ImieLekarza, DataICzas, StatusWizyty FROM Wizyty WHERE IdUsera = @IdUsera";
+                string query = "SELECT Id, NazwiskoPacjenta, ImiePacjenta, WiekPacjenta, NrTelKlienta, MailKlienta, PlecP, ImieLekarza, DataICzas, StatusWizyty FROM Wizyty WHERE IdUsera = @IdUsera";
                 using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@IdUsera", loggedUserId);
@@ -127,24 +210,30 @@ namespace DentalClinic
                         adapter.Fill(dataTable);
 
                         WizytyHistoria.DataSource = dataTable;
+                        WizytyHistoria.RowHeadersVisible = false; // aby ukryć pole po lewej stronie tabeli(puste)
 
-                        // Dodanie kolumny z przyciskiem "Oceń"
-                        DataGridViewButtonColumn ocenColumn = new DataGridViewButtonColumn();
-                        ocenColumn.Name = "Oceń";
-                        ocenColumn.Text = "Oceń";
-                        ocenColumn.UseColumnTextForButtonValue = true;
-                        WizytyHistoria.Columns.Add(ocenColumn);
 
-                        // Zablokowanie edycji wszystkich komórek, oprócz przycisku "Oceń"
+                        WizytyHistoria.Columns["id"].Visible = false;
+
+                        // Sprawdzenie, czy kolumna "Oceń" już istnieje
+                        if (!WizytyHistoria.Columns.Contains("Oceń"))
+                        {
+                            DataGridViewButtonColumn ocenColumn = new DataGridViewButtonColumn();
+                            ocenColumn.Name = "Oceń";
+                            ocenColumn.Text = "Oceń";
+                            ocenColumn.UseColumnTextForButtonValue = true;
+                            WizytyHistoria.Columns.Add(ocenColumn);
+
+                        }
+
                         foreach (DataGridViewColumn column in WizytyHistoria.Columns)
                         {
                             if (column.Name != "Oceń")
                             {
-                                column.ReadOnly = true; // Tylko przycisk "Oceń" będzie aktywny
+                                column.ReadOnly = true;
                             }
                         }
 
-                        // Ukrywanie przycisku "Oceń" w przypadku, gdy status wizyty nie jest "Ukończony"
                         foreach (DataGridViewRow row in WizytyHistoria.Rows)
                         {
                             if (row.Cells["StatusWizyty"].Value != null)
@@ -152,15 +241,15 @@ namespace DentalClinic
                                 var status = row.Cells["StatusWizyty"].Value.ToString();
                                 var ocenButton = row.Cells["Oceń"] as DataGridViewButtonCell;
 
-                                if (ocenButton != null) // Upewniamy się, że komórka "Oceń" to przycisk
+                                if (ocenButton != null)
                                 {
                                     if (status != "Ukończony")
                                     {
-                                        ocenButton.ReadOnly = true;  // Zablokowanie przycisku
+                                        ocenButton.ReadOnly = true;
                                     }
                                     else
                                     {
-                                        ocenButton.ReadOnly = false;  // Aktywowanie przycisku
+                                        ocenButton.ReadOnly = false;
                                     }
                                 }
                             }
@@ -169,6 +258,7 @@ namespace DentalClinic
                 }
             }
         }
+
 
         private void WizytyHistoria_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -186,12 +276,15 @@ namespace DentalClinic
                     if (statusWizyty == "Ukończony")
                     {
                         int visitId = Convert.ToInt32(row.Cells["Id"].Value);
-                        // Możesz dodać kod do uruchomienia formularza oceny wizyty
-                        MessageBox.Show($"Ocena wizyty o ID: {visitId}");
+                        // Uruchamiamy formularz oceny wizyty
+                        comment commForm = new comment(visitId);
+                        commForm.ShowDialog();
+
+                        
                     }
                     else
                     {
-                        MessageBox.Show("Nie można ocenić wizyty, ponieważ nie jest ona ukończona.");
+                        MessageBox.Show("Nie można ocenić wizyty, ponieważ nie jest ona ukończona lub została już oceniona wcześniej.");
                     }
                 }
             }
@@ -200,6 +293,18 @@ namespace DentalClinic
         private void TwojProfil_Load(object sender, EventArgs e)
         {
             LoadVisitHistory();
+            LoadUserData();
+            
+        }
+
+        private void Haslo_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void ZadajPytanie_Click(object sender, EventArgs e)
+        {
+            ZadajPytanie zadajForm = new ZadajPytanie();
+            zadajForm.ShowDialog();
         }
     }
 }

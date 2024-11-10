@@ -7,11 +7,13 @@ namespace DentalClinic
     public partial class WizytaOmow : Form
     {
         private LogowanieUz logowanieUz;
+        private int userId;
 
-        public WizytaOmow(LogowanieUz logowanieUz)
+        public WizytaOmow(LogowanieUz logowanieUz , int userId)
         {
             InitializeComponent();
             this.logowanieUz = logowanieUz; // Zapisz referencję do obiektu logowania
+            this.userId = userId; // Zapisz UserId w zmiennej
         }
 
         private void WizytaOmow_Load(object sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace DentalClinic
 
                 // Tworzenie i otwieranie formularza ZapisWizyty
                 // Przekazywanie UserName i ID wizyty oraz ID użytkownika logowanego (logowanieUz.UserId)
-                ZapisWizyty zapiswizytyForm = new ZapisWizyty(logowanieUz.UserName, visitId, logowanieUz.UserId);
+                ZapisWizyty zapiswizytyForm = new ZapisWizyty(logowanieUz.UserName, visitId, userId);
                 zapiswizytyForm.LoadData(imieLekarza, dataIczas, visitId); // Przekazywanie danych do formularza
                 zapiswizytyForm.ShowDialog(); // Wyświetlenie formularza
             }

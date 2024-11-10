@@ -13,6 +13,7 @@ namespace DentalClinic
         private string userName;
         private long visitId;
         private int userId;
+        private LogowanieUz logowanieUz;
 
         // Konstruktor z parametrami
         public ZapisWizyty(string userName, long visitId, int userId)
@@ -20,7 +21,7 @@ namespace DentalClinic
             InitializeComponent();
             this.userName = userName;
             this.visitId = visitId;
-            this.userId = userId;
+            this.userId = userId; // Zakładam, że logowanieUz ma właściwość UserId
         }
 
         // Ładowanie danych lekarza i DT
@@ -105,7 +106,6 @@ namespace DentalClinic
             SaveVisit();
         }
 
-        // Zapis wizyt do bazy
         private void SaveVisit()
         {
             try
@@ -129,16 +129,19 @@ namespace DentalClinic
                 string imieLekarza = labelImieLekarza.Text.Replace("Imię Lekarza: ", "").Trim();
                 string dataIczas = labelDataICzas.Text.Replace("Data i Czas: ", "").Trim();
 
+                // Określenie statusu wizyty
+                string statusWizyty = "Aktywny";
+
                 // Nawiązanie połączenia z bazą danych
                 using (var connection = new SQLiteConnection(@"Data Source=C:\Users\halin\Desktop\DentalClinic\DataBase\DentalClinic.db;Version=3;"))
                 {
                     connection.Open(); // Otwieranie połączenia
 
-                    if (visitId > 0)
+                    if (visitId > 0) // Jeżeli ID wizyty istnieje, wykonaj zapis (aktualizację) z UserId
                     {
-                        // Wykonaj aktualizację wizyty
                         string updateQuery = "UPDATE Wizyty SET NazwiskoPacjenta = @NazwiskoPacjenta, OpisProblemu = @OpisProblemu, ImiePacjenta = @ImiePacjenta, " +
-                                             "WiekPacjenta = @WiekPacjenta, NrTelKlienta = @NrTelKlienta, MailKlienta = @MailKlienta, PlecP = @PlecP, ImieLekarza = @ImieLekarza, DataICzas = @DataICzas " +
+                                             "WiekPacjenta = @WiekPacjenta, NrTelKlienta = @NrTelKlienta, MailKlienta = @MailKlienta, PlecP = @PlecP, ImieLekarza = @ImieLekarza, " +
+                                             "DataICzas = @DataICzas, IdUsera = @IdUsera, StatusWizyty = @StatusWizyty " + // Dodanie pola StatusWizyty
                                              "WHERE id = @id"; // Użyj małej litery "id"
 
                         using (var updateCommand = new SQLiteCommand(updateQuery, connection))
@@ -147,48 +150,35 @@ namespace DentalClinic
                             updateCommand.Parameters.AddWithValue("@OpisProblemu", opisProblemu);
                             updateCommand.Parameters.AddWithValue("@ImiePacjenta", imie);
                             updateCommand.Parameters.AddWithValue("@WiekPacjenta", wiek);
-                            updateCommand.Parameters.AddWithValue("@NrTelKlienta", nrTelefonu); // Dodanie numeru telefonu
+                            updateCommand.Parameters.AddWithValue("@NrTelKlienta", nrTelefonu);
                             updateCommand.Parameters.AddWithValue("@MailKlienta", email);
                             updateCommand.Parameters.AddWithValue("@PlecP", plec);
                             updateCommand.Parameters.AddWithValue("@ImieLekarza", imieLekarza);
                             updateCommand.Parameters.AddWithValue("@DataICzas", dataIczas);
+                            updateCommand.Parameters.AddWithValue("@IdUsera", userId); // Przekazanie UserId
+                            updateCommand.Parameters.AddWithValue("@StatusWizyty", statusWizyty); // Dodanie wartości "Aktywny" dla StatusWizyty
                             updateCommand.Parameters.AddWithValue("@id", visitId); // Użycie małej litery "id"
 
                             updateCommand.ExecuteNonQuery(); // Wykonaj aktualizację
                         }
+
+                        MessageBox.Show("Wizyta została pomyślnie zaktualizowana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close(); // Zamknięcie formularza po zapisie
                     }
-                    else
+                    else // Jeśli ID wizyty jest 0, to oznacza, że wizyta nie istnieje
                     {
-                        // Pacjent nie istnieje, wykonaj wstawienie
-                        string insertQuery = "INSERT INTO Wizyty (NazwiskoPacjenta, OpisProblemu, ImiePacjenta, WiekPacjenta, NrTelKlienta, MailKlienta, PlecP, ImieLekarza, DataICzas) " +
-                                             "VALUES (@NazwiskoPacjenta, @OpisProblemu, @ImiePacjenta, @WiekPacjenta, @NrTelKlienta, @MailKlienta, @PlecP, @ImieLekarza, @DataICzas)";
-
-                        using (var insertCommand = new SQLiteCommand(insertQuery, connection))
-                        {
-                            insertCommand.Parameters.AddWithValue("@NazwiskoPacjenta", nazwisko);
-                            insertCommand.Parameters.AddWithValue("@OpisProblemu", opisProblemu);
-                            insertCommand.Parameters.AddWithValue("@ImiePacjenta", imie);
-                            insertCommand.Parameters.AddWithValue("@WiekPacjenta", wiek);
-                            insertCommand.Parameters.AddWithValue("@NrTelKlienta", nrTelefonu); // Dodanie numeru telefonu
-                            insertCommand.Parameters.AddWithValue("@MailKlienta", email);
-                            insertCommand.Parameters.AddWithValue("@PlecP", plec);
-                            insertCommand.Parameters.AddWithValue("@ImieLekarza", imieLekarza);
-                            insertCommand.Parameters.AddWithValue("@DataICzas", dataIczas);
-
-                            insertCommand.ExecuteNonQuery(); // Wykonaj wstawienie
-                        }
+                        MessageBox.Show("Nie znaleziono wizyty do zaktualizowania. Proszę podać poprawne ID wizyty.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
-                // Informacja o pomyślnym zapisie
-                MessageBox.Show("Wizyta została pomyślnie zapisana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close(); // Zamknięcie formularza po zapisie
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Wystąpił błąd podczas zapisywania wizyty: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
 
 
